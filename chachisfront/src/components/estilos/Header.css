@@ -1,0 +1,55 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem;
+    background-color: #FFFAE8;
+}
+
+.logo-container {
+    display: flex; /* Alinear logo y nombre en una sola línea */
+    align-items: center; /* Centrar verticalmente */
+}
+
+.login-text {
+    font-family: "Century Gothic", sans-serif;
+    cursor: pointer;
+    color: inherit;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-style: italic; /* Mantiene el color del texto */
+}
+
+.tipografia {
+    height: 65px;
+    margin-right: 0.4em;
+}
+
+.logo img {
+    height: 65px; 
+    margin-right: 0.5rem; /* Añadir un margen para separar el logo del nombre */
+}
+
+h1 {
+    margin: 0; /* Eliminar márgenes del título */
+    font-size: 1rem; /* Ajustar el tamaño de fuente según sea necesario */
+}
+
+nav a {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: #000;
+}
+
+.iconos {
+    height: 75px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.icono-menu {
+    height: 30px;
+    width: 15px;
+    margin-right: 15px;
+    margin-left: 15px;
+}

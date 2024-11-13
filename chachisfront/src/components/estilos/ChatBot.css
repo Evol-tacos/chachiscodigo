@@ -1,0 +1,101 @@
+.chatbot-popup {
+    position: fixed;
+    width: 300px;  /* Ajusta el ancho deseado */
+    height: 500px; /* Ajusta el alto deseado */
+    bottom: 30px;  /* Mantén el borde inferior a la vista */
+    right: 20px;   /* Posiciona la ventana en la esquina derecha */
+    background-color: #d9d9d9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.7rem;
+}
+
+.chat-icon {
+    margin: 0;
+    width: 55px; /* Ajusta el tamaño deseado */
+    height: 40px; /* Ajusta el tamaño deseado */
+    margin-right: 10px; /* Agrega margen a la derecha para crear espacio entre el icono y el texto */
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px;
+    background-color: #a11717;
+    color: #fff;
+    font-weight: bold;
+    font-family: "Century Gothic", sans-serif;
+    gap: 8px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.close-button-chat {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0; /* Asegúrate de que no haya padding alrededor del botón */
+}
+
+.close-icon-chat {
+    margin-top: 0.2rem;
+    width: 35px; /* Ajusta el tamaño del ícono de cerrar */
+    height: 30px; /* Ajusta el tamaño del ícono de cerrar */
+}
+
+.chatbot-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatbot-content button {
+    background-color: #e6a6a1;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.71rem;
+}
+
+.contenedor-mensaje {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.71rem;
+}
+
+.select-option {
+    font-family: "Century Gothic", sans-serif;
+    text-align: center;
+    font-weight: bold;
+    color: #6e6e6e;
+    padding: 5px; /* Reducir el padding */
+    font-size: 0.7rem;
+    margin-top: 0; /* Ajustar el margen superior */
+}
+
+.main-text-chat {
+    margin: 0;
+    display: flex;
+    align-items: center; /* Asegura que el texto esté alineado al centro verticalmente con el icono */
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.9rem;
+}

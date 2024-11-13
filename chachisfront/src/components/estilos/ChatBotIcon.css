@@ -1,0 +1,13 @@
+.chat-bot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 95px;
+    height: 80px;
+    cursor: pointer;
+}
+
+.chat-bot-icon img {
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,72 @@
+/* Estilos del encabezado */
+.header-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    background-color: #FFFAE8;
+}
+
+.logo-container-menu {
+    display: flex; /* Alinear logo y nombre en una sola línea */
+    align-items: center; /* Centrar verticalmente */
+}
+
+.tipografia-menu {
+    height: 65px;
+    margin-right: 0.5rem;
+}
+
+h1 {
+    margin: 0; /* Eliminar márgenes del título */
+    font-size: 1.5rem; /* Ajustar el tamaño de fuente según sea necesario */
+}
+
+.iconos {
+    height: 30px;
+    width: 30px;
+    margin-right: 0.5rem;
+}
+
+/* Estilos adicionales para la página de menú */
+.menu-container {
+    padding: 1rem;
+    font-family: "Century Gothic", sans-serif;
+    text-align: center;
+}
+
+.menu-title {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    font-style: italic;
+    margin: 1rem 0;
+    color: #333;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-items: center;
+    padding: 1rem; /* Línea azul alrededor */
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid-item img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.grid-item p {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}

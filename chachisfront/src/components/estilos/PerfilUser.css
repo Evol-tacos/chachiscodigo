@@ -1,0 +1,74 @@
+.page-container {
+    padding: 1rem;
+    font-family: "Century Gothic", sans-serif;
+    text-align: center;
+}
+
+.page-title {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-style: italic;
+    margin: 1rem;
+    color: #333;
+}
+
+.page-content {
+    background-color: #fffae8; 
+    padding: 15px;
+    border-radius: 16px;
+    max-width: 500px; 
+    width: 100%; 
+    position: relative; 
+}
+
+.page-texto {
+    font-family: "Century Gothic", sans-serif;
+    display: block;
+    color: #333;
+    font-size: 0.8rem;
+    margin-top: 0.7rem;
+    cursor: pointer;
+    text-align: left;
+}
+
+.confirmar-button, .logoff-button {
+        background-color: #D9412C; /* Botón rojo */
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 40%;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 1rem;
+        text-align: center;
+        font-family: "Century Gothic", sans-serif;
+        font-weight: bold;
+}
+
+.espacio {
+    margin-top: -0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.izquierda {
+    display: flex; 
+    justify-content: flex-start;
+}
+
+.derecha {
+    display: flex; 
+    justify-content: flex-end;
+}
+
+.separador { 
+    margin-top: -3.24rem;
+    display: flex; 
+    justify-content: flex-end;
+    margin-right: 0.7rem;
+}
+
+.size-text {
+    font-size: x-small;
+}

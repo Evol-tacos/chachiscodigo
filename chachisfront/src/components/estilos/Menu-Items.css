@@ -1,0 +1,40 @@
+
+
+/* Estilos adicionales para la página de menú */
+.menu-item-container {
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.menu-item-title {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    font-style: italic;
+    margin: 1rem 0;
+    color: #333;
+}
+
+.grid-container-item {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: center;
+}
+
+.grid-item {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid-item-bday img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+}
