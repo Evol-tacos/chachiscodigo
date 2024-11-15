@@ -1,0 +1,142 @@
+.carrito-popup {
+    position: fixed;
+    width: 300px;
+    height: 500px;
+    top: 60px;
+    right: 20px;
+    background-color: #fffae8;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.7rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-content {
+    padding: 15px;
+    flex-grow: 1;
+    overflow-y: auto; /* Permite el desplazamiento en general */
+}
+
+.footer-fixed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fffae8;
+    position: sticky;
+    bottom: 0;
+}
+
+.total-text {
+    margin-left: 0.5rem;
+    font-family: "Century Gothic", sans-serif;
+    font-weight: bold;
+    color: #D9412C;
+    font-size: 1rem;
+}
+
+.pagar-button {
+    background-color: #D9412C;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px;
+    background-color: #e8c7a4;
+    color: #161616;
+    font-weight: bold;
+    font-family: "Century Gothic", sans-serif;
+    gap: 8px;
+}
+
+.main-text-cart {
+    margin: 0;
+    display: flex;
+    text-align: left;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.9rem;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #e8c7a4;
+    border-radius: 8px;
+    margin-bottom: 10px; /* Separación entre productos */
+}
+
+.cake-img {
+    height: fit-content;
+    width: 40%; 
+    border-radius: 5px;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-name {
+    font-weight: bold;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 1rem;
+    text-align: left;
+    color: #161616;
+    margin: 0;
+}
+
+.product-description {
+    text-align: left;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.8rem;
+    color: #333;
+    margin: 5px 0;
+}
+
+.product-price {
+    font-size: 0.9rem;
+    color: #D9412C;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: -1rem;
+}
+
+.items-cart {
+    font-family: "Century Gothic", sans-serif;
+    text-align: center;
+    font-weight: bold;
+    color: #6e6e6e;
+    padding: 5px;
+    font-size: 0.7rem;
+    margin-top: auto;
+    margin-bottom: -0.1rem;
+}
+
+.close-button-cart {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.close-icon-cart {
+    margin-top: 0.2rem;
+    width: 30px;
+    height: 25px;
+}

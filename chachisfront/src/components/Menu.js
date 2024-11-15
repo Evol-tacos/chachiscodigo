@@ -26,11 +26,15 @@ function Menu() {
                     <p>Infantil</p>
                 </div>
                 <div className="grid-item">
+                    <Link to="/wedding">
                     <img src={wedding} alt="Pastel de Boda" />
+                    </Link>
                     <p>Boda</p>
                 </div>
                 <div className="grid-item">
+                    <Link to="/personalizado">
                     <img src={personal} alt="Pastel Personalizado" />
+                    </Link>
                     <p>Personalizado</p>
                 </div>
             </div>

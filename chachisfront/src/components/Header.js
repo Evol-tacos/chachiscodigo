@@ -6,15 +6,18 @@ import tipografia from './icons/Chachis-tipografia.png';
 import Login from './LoginPopUp.js';
 import RegistroU from './RegistroU.js';
 import RecuperarC from './RecuperarContra.js';
+import CambiarC from './CambiarContra.js';
 
 function Header() {
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    const [isRecuperarOpen, setIsRecuperarOpen] = useState(false);
+    const [isChangeOpen, setIsChangeOpen] = useState(false);
 
     const openLogin = () => {
         setIsRegisterOpen(false);
-        setIsConfirmOpen(false);
+        setIsRecuperarOpen(false);
+        setIsChangeOpen(false);
         setIsLoginOpen(true);
     };
 
@@ -28,11 +31,20 @@ function Header() {
     const closeRegister = () => setIsRegisterOpen(false);
 
     const openConfirm = () => {
+        setIsChangeOpen(false);
         setIsLoginOpen(false);
-        setIsConfirmOpen(true);
+        setIsRecuperarOpen(true);
     };
 
-    const closeConfirm = () => setIsConfirmOpen(false);
+    const closeRecuperar = () => setIsRecuperarOpen(false);
+
+    const openChange = () => {
+        setIsLoginOpen(false);
+        setIsRecuperarOpen(false);
+        setIsChangeOpen(true);
+    };
+
+    const closeChange = () => setIsChangeOpen(false);
 
     return (
         <header className="header">
@@ -56,7 +68,8 @@ function Header() {
                 isOpen={isLoginOpen}
                 onClose={closeLogin}
                 onOpenRegister={openRegister}
-                onOpenConfirm={openConfirm} // Prop para abrir el registro
+                onOpenConfirm={openConfirm} 
+                onOpenChange={openChange} // Prop para abrir el registro
             />
 
             {/* Componente RegistroU */}
@@ -67,8 +80,14 @@ function Header() {
 
             {/* Componente RecuperarC */}
             <RecuperarC
-                isOpen={isConfirmOpen}
-                onClose={closeConfirm}
+                isOpen={isRecuperarOpen}
+                onClose={closeRecuperar}
+                onOpenChange={openChange} // Asegúrate de pasar esta prop
+            />
+
+            <CambiarC
+                isOpen={isChangeOpen}
+                onClose={closeChange}
             />
         </header>
     );

@@ -1,10 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './estilos/Login.css';
 import logo from './icons/logo-png.png';
 
 function Login({ isOpen, onClose, onOpenRegister, onOpenConfirm }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     if (!isOpen) return null;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:4000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+                credentials: 'include', // Esto asegura que las cookies se envíen con la solicitud
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                // Redirigir o realizar alguna acción después del inicio de sesión exitoso
+                window.location.href = '/perfil';
+            } else {
+                // Manejar errores
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     return (
         <div className="modal-overlay" onClick={onClose}>
@@ -12,11 +39,21 @@ function Login({ isOpen, onClose, onOpenRegister, onOpenConfirm }) {
                 <button className="close-button" onClick={onClose}>X</button>
                 <img src={logo} alt="Chachis Pastelería Logo" className="modal-logo" />
                 <p className='texto-principal'>¡Bienvenido a Chachis Pastelería!</p>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label>Email</label>
-                    <input type="email" placeholder="Email" />
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                     <label>Contraseña</label>
-                    <input type="password" placeholder="Contraseña" />
+                    <input
+                        type="password"
+                        placeholder="Contraseña"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                     <button type="submit" className="login-button">Iniciar sesión</button>
                 </form>
                 <label className="link" onClick={() => {

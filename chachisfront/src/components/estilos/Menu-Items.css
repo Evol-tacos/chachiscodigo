@@ -7,23 +7,7 @@
     text-align: center;
 }
 
-.menu-item-title {
-    font-family: "Century Gothic", sans-serif;
-    font-size: 2rem;
-    font-weight: bold;
-    font-style: italic;
-    margin: 1rem 0;
-    color: #333;
-}
-
-.grid-container-item {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    justify-items: center;
-}
-
-.grid-item {
+.grid-item-bday {
     font-family: "Century Gothic", sans-serif;
     font-size: 1.2rem;
     font-weight: bold;
@@ -37,4 +21,43 @@
     width: 200px;
     height: auto;
     border-radius: 10px;
+}
+
+.add-cart {
+    background-color: #e8c7a4; /* Botón rojo */
+    color: #161616;
+    border: none;
+    padding: 10px;
+    width: 80%;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem; /* Asegura que el botón esté debajo de la imagen */
+    font-family: "Century Gothic", sans-serif;
+    font-weight: bold;
+    align-items: center;
+}
+
+
+.menu-item-title {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    font-style: italic;
+    margin: 1rem 0;
+    color: #161616;
+}
+
+.grid-container-item {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: center;
+}
+
+.grid-container-item-W {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-items: center;
 }

@@ -15,7 +15,7 @@
     background-color: #fffae8; /* Color beige */
     padding: 11px; /* Reducido para menos espacio interno */
     border-radius: 16px;
-    width: 600px; /* Ancho fijo, ajusta según tu preferencia */
+    width: 600px; /* Ancho fijo*/
     max-width: 90%; /* Limita el ancho en pantallas pequeñas */
     height: fit-content;
     text-align: center;
@@ -59,6 +59,7 @@
     width: 50%;
     border-radius: 8px;
     font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
     margin-top: 1rem;
 }

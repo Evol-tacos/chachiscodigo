@@ -40,7 +40,7 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 0; /* Asegúrate de que no haya padding alrededor del botón */
+    padding: 0;
 }
 
 .close-icon-chat {
@@ -95,7 +95,7 @@
 .main-text-chat {
     margin: 0;
     display: flex;
-    align-items: center; /* Asegura que el texto esté alineado al centro verticalmente con el icono */
+    align-items: center; 
     font-family: "Century Gothic", sans-serif;
     font-size: 0.9rem;
 }

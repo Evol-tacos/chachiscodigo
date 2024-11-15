@@ -1,0 +1,63 @@
+.addcarrito-popup {
+    position: fixed;
+    top: 50%;
+    left: 42%;
+    width: 35%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+    background-color: #fffae8;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.6rem;
+    z-index: 1000;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button-addCart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.close-icon-addCart {
+    margin-top: 0.3px;
+    width: 30px;
+    height: 30px;
+}
+
+.cake-img-cart {
+    width: 30%;
+    height: 30%;
+    border-radius: 5px;
+    margin-top: 5rem;
+    object-fit: cover;
+}
+
+.popup-title {
+    font-size: 0.6rem;
+    font-weight: bold;
+    margin: 2px 0;
+    text-align: center;
+}
+
+.pagar-button-cart{
+    width: 80%;
+    padding: 3px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    cursor: pointer;
+    text-align: center;
+}
