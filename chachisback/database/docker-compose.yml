@@ -1,0 +1,39 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: chachis_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: chachis_bakery_db
+      MYSQL_USER: chachisuser
+      MYSQL_PASSWORD: userpassword
+    volumes:
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/1-init.sql
+      - ./scripts/dummy-data.sql:/docker-entrypoint-initdb.d/2-dummy-data.sql
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - chachis_network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: chachis_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: chachisuser
+      PMA_PASSWORD: userpassword
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - chachis_network
+
+networks:
+  chachis_network:
+    driver: bridge
+
+volumes:
+  mysql_data:

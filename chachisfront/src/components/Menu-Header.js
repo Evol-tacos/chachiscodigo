@@ -6,13 +6,18 @@ import tipografia from './icons/Chachis-tipografia.png';
 import user from './icons/icono-user.png';
 import shop from './icons/bag-icon.png';
 import dots from './icons/menu-icon.png';
-import CarritoPopup from './Carrito.js';
+import Carrito from './Carrito.js';
+import Categorias from './Categorias.js';
 
 function Menu() {
     const [showCarrito, setShowCarrito] = useState(false);
+    const [showCategory, setShowCategory] = useState(false);
 
     const toggleCarrito = () => {
         setShowCarrito(!showCarrito);
+    };
+    const toggleCategory = () => {
+        setShowCategory(!showCategory);
     };
 
     return (
@@ -37,9 +42,14 @@ function Menu() {
                     alt="Carrito de compras"
                     onClick={toggleCarrito} // Agregar evento de clic
                 />
-                <img src={dots} className="icono-menu" alt="Más funciones" />
+                <img src={dots} 
+                className="icono-menu" 
+                alt="Más funciones" 
+                onClick={toggleCategory}
+                />
             </nav>
-            {showCarrito && <CarritoPopup onClose={toggleCarrito} />}
+            {showCarrito && <Carrito onClose={toggleCarrito} />}
+            {showCategory && <Categorias onClose={toggleCategory} />}
         </header>
     );
 }

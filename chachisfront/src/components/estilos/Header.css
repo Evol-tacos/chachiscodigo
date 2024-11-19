@@ -6,6 +6,10 @@
     background-color: #FFFAE8;
 }
 
+.right-space {
+    margin-right: 1rem;
+}
+
 .logo-container {
     display: flex; /* Alinear logo y nombre en una sola línea */
     align-items: center; /* Centrar verticalmente */

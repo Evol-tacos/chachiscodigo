@@ -1,0 +1,88 @@
+.upload-popup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30vw; /* Ocupa la mitad de la pantalla */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    background-color: #fffae8;
+    border-radius: 0; /* Elimina el borde redondeado para alinearlo con los bordes de la pantalla */
+    box-shadow: -5px 0px 50px rgba(0, 0, 0, 0.2); /* Sombra en el borde izquierdo */
+    overflow: hidden;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.8rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.up-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #e8c7a4;
+    text-align: center;
+}
+
+.title-header-up {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    color: #161616;
+}
+
+.close-button-up {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    margin-right: -0.9rem;
+}
+
+.close-icon-up {
+    width: 35px;
+    height: 30px;
+}
+
+.upload-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.tamaño-img {
+    margin-top: -2rem;
+    width: 400px;
+    height: 500px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.subir-button {
+    font-family: "Century Gothic", sans-serif;
+    background-color: #D9412C;
+    color: white;
+    border: none;
+    padding: 13px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex; /* Activa flexbox */
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    gap: 10px; /* Espaciado entre el ícono y el texto */
+}
+
+.subir-icono {
+    width: 20px; /* Ajusta el tamaño del ícono si es necesario */
+    height: 20px;
+}

@@ -1,15 +1,17 @@
 .carrito-popup {
+    min-width: unset; 
+    max-width: unset;
     position: fixed;
-    width: 300px;
-    height: 500px;
-    top: 60px;
-    right: 20px;
+    top: 0;
+    right: 0;
+    width: 30vw; 
+    height: 100vh; 
     background-color: #fffae8;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0; 
+    box-shadow: -5px 0px 50px rgba(0, 0, 0, 0.2); 
     overflow: hidden;
     font-family: "Century Gothic", sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     z-index: 1000;
     display: flex;
     flex-direction: column;
@@ -18,7 +20,8 @@
 .cart-content {
     padding: 15px;
     flex-grow: 1;
-    overflow-y: auto; /* Permite el desplazamiento en general */
+    overflow-y: auto;
+    background-color: white; /* Fondo blanco para el contenido */
 }
 
 .footer-fixed {
@@ -27,8 +30,7 @@
     align-items: center;
     padding: 10px;
     background-color: #fffae8;
-    position: sticky;
-    bottom: 0;
+    border-top: 1px solid #e0e0e0; /* Añade una línea superior para separar */
 }
 
 .total-text {
@@ -37,6 +39,7 @@
     font-weight: bold;
     color: #D9412C;
     font-size: 1rem;
+    text-transform: uppercase;
 }
 
 .pagar-button {
@@ -44,58 +47,60 @@
     color: white;
     border: none;
     padding: 10px;
-    width: 100px;
+    width: 100%;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    text-transform: uppercase;
 }
 
 .carrito-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 9px;
+    padding: 15px 30px;
     background-color: #e8c7a4;
-    color: #161616;
-    font-weight: bold;
-    font-family: "Century Gothic", sans-serif;
-    gap: 8px;
+    text-align: center;
 }
 
-.main-text-cart {
-    margin: 0;
-    display: flex;
-    text-align: left;
+.title-header-cart {
+    color: #161616;
+    font-weight: bold;
+    font-size: 35px;
     font-family: "Century Gothic", sans-serif;
-    font-size: 0.9rem;
+    line-height: 1;
+    margin: 0;
+    margin-left: -0.5rem;
 }
 
 .product-item {
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color: #e8c7a4;
+    background-color: #fffae8; /* Fondo blanco */
     border-radius: 8px;
-    margin-bottom: 10px; /* Separación entre productos */
+    margin-bottom: 10px; /* Sombra ligera */
 }
 
 .cake-img {
+    width: 80px; /* Tamaño de imagen fijo */
     height: fit-content;
-    width: 40%; 
     border-radius: 5px;
+    margin-right: 10px;
 }
 
 .product-details {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    margin-left: 10px; /* Espacio entre imagen y detalles */
 }
 
 .product-name {
     font-weight: bold;
     font-family: "Century Gothic", sans-serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-align: left;
     color: #161616;
     margin: 0;
@@ -105,8 +110,8 @@
     text-align: left;
     font-family: "Century Gothic", sans-serif;
     font-size: 0.8rem;
-    color: #333;
-    margin: 5px 0;
+    color: #6e6e6e;
+    margin: 2px 0;
 }
 
 .product-price {
@@ -114,7 +119,7 @@
     color: #D9412C;
     font-weight: bold;
     text-align: right;
-    margin-bottom: -1rem;
+    margin-top: auto;
 }
 
 .items-cart {
@@ -124,8 +129,6 @@
     color: #6e6e6e;
     padding: 5px;
     font-size: 0.7rem;
-    margin-top: auto;
-    margin-bottom: -0.1rem;
 }
 
 .close-button-cart {
@@ -133,10 +136,11 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    margin: 0;
+    margin-right: -0.9rem;
 }
 
 .close-icon-cart {
-    margin-top: 0.2rem;
-    width: 30px;
-    height: 25px;
+    width: 35px;
+    height: 30px;
 }

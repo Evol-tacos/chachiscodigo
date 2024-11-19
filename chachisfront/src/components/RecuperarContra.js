@@ -3,6 +3,7 @@ import './estilos/RecuperarContra.css';
 import logo from './icons/logo-chachis-circle.png';
 
 function RecuperarC({ isOpen, onClose, onOpenChange }) {
+    
     if (!isOpen) return null;
 
     return (
