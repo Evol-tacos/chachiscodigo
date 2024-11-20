@@ -20,7 +20,7 @@ function Perfil() {
 
             if (response.ok) {
                 // Redirigir al usuario a la página de inicio de sesión o a la página principal
-                window.location.href = '/login';
+                window.location.href = '/';
             } else {
                 console.error('Error al cerrar sesión');
             }

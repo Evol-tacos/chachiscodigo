@@ -1,0 +1,155 @@
+table {
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 16px;
+    overflow: hidden; /* Para aplicar bordes redondeados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra alrededor de la tabla */
+}
+
+th, td {
+    padding: 12px; /* Espaciado más amplio */
+    font-family: "Century Gothic", sans-serif; /* Fuente uniforme */
+    font-size: 14px; /* Tamaño de fuente más ajustado */
+}
+
+th {
+    background-color: #f9efcd; /* Color beige para el encabezado */
+    font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid #e5e5e5; /* Línea divisoria entre encabezado y cuerpo */
+}
+
+td {
+    vertical-align: middle;
+    text-align: center;
+    background-color: white;
+    border-bottom: 1px solid #e5e5e5; /* Líneas divisorias suaves */
+}
+
+tr:last-child td {
+    border-bottom: none; /* Eliminar borde en la última fila */
+}
+
+.img-s {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px; /* Bordes redondeados para las imágenes */
+}
+
+.icon-s {
+    width: 23px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.button-TP {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+.add-product-button {
+    font-family: "Century Gothic", sans-serif;
+    background-color: #D9412C; /* Rojo vibrante */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 30px;
+    float: right;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-button:hover {
+    background-color: #c03927;; /* Rojo más oscuro al pasar el cursor */
+}
+
+.sidebar {
+    background-color: #fff7e5; /* Fondo claro para la barra lateral */
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 16px;
+}
+
+.sidebar ul li img {
+    margin-right: 8px; /* Espaciado entre icono y texto */
+}
+
+/* Ajustar el ancho de los dropdowns */
+.dropdown {
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 5px 10px; /* Añade un poco más de espacio interno */
+    font-size: 12px;
+    font-family: "Century Gothic", sans-serif;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    width: 120px; /* Ajusta este valor según sea necesario */
+  }
+  
+  /* Colores dinámicos para pago */
+  .dropdown.pago.realizado {
+    background-color: #d4edda; /* Verde claro */
+    color: #155724; /* Verde oscuro */
+    border-color: #c3e6cb;
+  }
+  
+  .dropdown.pago.pendiente {
+    background-color: #f8d7da; /* Rojo claro */
+    color: #721c24; /* Rojo oscuro */
+    border-color: #f5c6cb;
+  } 
+
+  .formulario-linea {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    align-items: center;
+  }
+  
+  .input-form-linea {
+    flex: 1;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .guardar-button-TP {
+    font-family: "Century Gothic";
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .cancelar-button-TP {
+    font-family: "Century Gothic";
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
