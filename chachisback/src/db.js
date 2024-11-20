@@ -5,7 +5,8 @@ const db = mysql.createPool({
     user: process.env.USERDB || 'chachisuser',
     database: process.env.DATABASE || 'chachis_bakery_db',
     password: process.env.PASSWORDDB || 'userpassword', // Asegúrate de que coincida con el archivo docker-compose
-    port: process.env.PORTDB || 3306 // Cambia 3306 a 3307
+    port: process.env.PORTDB || 3306, // Cambia 3306 a 3307
+    charset: 'utf8mb4'
 });
 
 // Verificar la conexión
