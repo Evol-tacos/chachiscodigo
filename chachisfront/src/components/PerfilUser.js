@@ -8,9 +8,9 @@ import pendiente from './icons/pay-icon.png'
 import process from './icons/process-icon.png'
 import cake from './icons/cake-icon.png'
 
+
 function Perfil() {
     const { handleLogout, user } = useContext(AuthContext);
-
     useEffect(() => {
         if (!user) {
             // Redirigir al usuario a la página principal si no está autenticado
@@ -29,6 +29,7 @@ function Perfil() {
                 <form>
                     <p className='page-texto izquierdo'>Nombre completo</p>
                     <div className="input-group">
+
                         <input className="input-edit izquierdo" type="text" placeholder="Nombre Completo" value={user.nombrecompleto} readOnly />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
@@ -36,6 +37,7 @@ function Perfil() {
                     </div>
                     <p className='page-texto izquierdo'>Correo Electrónico</p>
                     <div className="input-group">
+
                         <input className="input-edit" type="email" placeholder="Correo Electrónico" value={user.email} readOnly />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />

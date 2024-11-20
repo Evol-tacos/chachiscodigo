@@ -3,8 +3,7 @@ const db = require('../db');
 const User = {
     findByEmail: (email) => {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM clientes WHERE email = ?';
-            db.query(query, [email], (err, results) => {
+            db.query('SELECT * FROM clientes WHERE email = ?', [email], (err, results) => {
                 if (err) {
                     return reject(err);
                 }

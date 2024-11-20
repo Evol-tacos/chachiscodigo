@@ -21,6 +21,8 @@ const login = async (req, res) => {
         } else {
             return res.status(401).json({ success: false, message: 'Credenciales incorrectas' });
         }
+
+
     } catch (err) {
         console.error('Error en la consulta:', err);
         return res.status(500).json({ success: false, message: 'Error en el servidor' });
@@ -29,7 +31,7 @@ const login = async (req, res) => {
 
 //funcion asincrona debido a que no es necesario hacer el registro para poder navegar en la pagina
 const register = async (req, res) => {
-    const { nombrecompleto, email, telefono, direccion, contrasena } = req.body;
+    const { nombrecompleto, email, telefono, direccion, contrasena} = req.body;
     try {
         const hashedPassword = await bcrypt.hash(contrasena, 10);//encriptacion de la contraseña
         const results = await User.create(nombrecompleto, email, telefono, direccion, hashedPassword); 

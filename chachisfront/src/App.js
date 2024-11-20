@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './components/AuthContext';
-import Header from './components/Header';
+import Header from './components/Header.js'; 
 import MenuHeader from './components/Menu-Header.js';
+import MenuAdmin from './components/HeaderAdmin.js';
 import Menu from './components/Menu.js';
 import Main from './components/Main';
 import ChatBotIcon from './components/ChatBotIcon';
@@ -12,11 +13,13 @@ import Infantil from './components/Menu-infantil.js';
 import Perfil from './components/PerfilUser.js';
 import Cambiar from './components/CambiarContra.js';
 import Pedido from './components/Pedidos.js';
-import Personalizado from './components/Menu-pers.js';
+import Personalizado from './components/Pedidos.js';
 import Wedding from './components/Menu-Wedding.js';
 import Agregar from './components/addCarrito.js';
 import PP from './components/ProcederPago.js';
+import PA from './components/PerfilAdmin.js'; //Para acceder a la página del administrador
 import './App.css';
+
 
 function ConditionalHeader() {
     const location = useLocation();
@@ -34,6 +37,7 @@ function App() {
             <div className="App">
                 <ConditionalHeader />
                 <Routes>
+
                 <Route path="/" element={<Main />} />
                         <Route path="/menu" element={<Menu />} />
                         <Route path="/chatbot" element={<ChatBot />} />
@@ -46,19 +50,28 @@ function App() {
                         <Route path='/wedding' element={<PrivateRoute><Wedding /></PrivateRoute>} />
                         <Route path='/add' element={<PrivateRoute><Agregar /></PrivateRoute>} />
                         <Route path='/PP' element={<PrivateRoute><PP /></PrivateRoute>} />
-                </Routes>
 
-                <ChatBotIcon />
+                </Routes>
+                <ConditionalChatBot />
             </div>
         </Router>
         </AuthProvider>
     );
 }
 
+
 function PrivateRoute({ children }) {
     const { isAuthenticated } = React.useContext(AuthContext);
 
     return isAuthenticated ? children : <Navigate to="/" />;
 }
+
+function ConditionalChatBot() {
+    const location = useLocation();
+
+    // Renderiza el ícono del ChatBot solo si no estás en /pa
+    return location.pathname !== "/pa" ? <ChatBotIcon /> : null;
+}
+
 
 export default App;
