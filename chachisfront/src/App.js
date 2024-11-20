@@ -27,6 +27,9 @@ function ConditionalHeader() {
     if (location.pathname === "/menu") {
         return <MenuHeader />;
     }
+    if (location.pathname === "/PA") {
+        return <MenuAdmin />;
+    }
     return <Header />;
 }
 
@@ -50,6 +53,7 @@ function App() {
                         <Route path='/wedding' element={<PrivateRoute><Wedding /></PrivateRoute>} />
                         <Route path='/add' element={<PrivateRoute><Agregar /></PrivateRoute>} />
                         <Route path='/PP' element={<PrivateRoute><PP /></PrivateRoute>} />
+                        <Route path='/PA' element={<PrivateRoute><PA /></PrivateRoute>} />
 
                 </Routes>
                 <ConditionalChatBot />

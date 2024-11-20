@@ -29,8 +29,13 @@ function Login({ isOpen, onClose, onOpenRegister, onOpenConfirm }) {
                 setIsAuthenticated(true);
                 setUser(data.user);
                 localStorage.setItem('userName', data.user.nombrecompleto);
-                // Redirigir a la página del menú después del inicio de sesión exitoso
-                navigate('/menu');
+                localStorage.setItem('userTipo', data.user.tipo)
+                if (data.user.tipo === 'admin') {
+                    navigate('/PA')
+                } else {
+                    // Redirigir a la página del menú después del inicio de sesión exitoso
+                    navigate('/menu');
+                }
             } else {
                 // Manejar errores
                 console.error(data.message);

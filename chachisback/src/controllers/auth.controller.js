@@ -20,7 +20,7 @@ const login = async (req, res) => {
             return res.json({ success: true, message: 'Inicio de sesión exitoso',  user });
         } else {
             return res.status(401).json({ success: false, message: 'Credenciales incorrectas' });
-        }
+        } 
 
 
     } catch (err) {
