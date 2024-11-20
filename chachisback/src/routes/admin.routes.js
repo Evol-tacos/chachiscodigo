@@ -10,9 +10,9 @@ router.get('/api/sabores', getInfoSabores); // Ruta para obtener los sabores
 
 router.get('/api/rellenos', getInfoRellenos); // Ruta para obtener los rellenos
 
-router.get('/api/producto', getInfoProductos); // Ruta para obtener los pedidos
+router.get('/api/productos', getInfoProductos); // Ruta para obtener los pedidos
 
-router.get('/api/pedido', getInfoPedidos); // Ruta para obtener los pedidos
+router.get('/api/pedidos', getInfoPedidos); // Ruta para obtener los pedidos
 
 router.get('/api/usuarios', getInfoUsuarios); // Ruta para obtener los pedidos
 

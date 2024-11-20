@@ -1,9 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import './estilos/Tablas.css';
 import Edit from './icons/edit-icon.png';
 import Trash from './icons/trash-icon.png';
+import { onDelete } from '../utils/api';
 
 function TablaSabores() {
+    const [sabores, setSabores] = useState([]);
+    useEffect(() => {
+
+        const fetchSabores = async () => {
+            try {
+                const response = await fetch("http://localhost:4000/api/sabores");
+                const data = await response.json();
+                console.log(data);
+                setSabores(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error("Error al obtener los sabores", error);
+                setSabores([]);
+            }
+        };
+        fetchSabores();
+    }, []);
+
+    const handleDelete = async (id) => {
+        const result = await onDelete("sabores", id);
+        if (result.success) {
+            setSabores((prevSabores) =>
+                prevSabores.filter((sabor) => sabor.id_sabor !== id)
+            );
+        } else {
+            console.error("Error al borrar:", result.error);
+        }
+    };
+
     return (
         <div>
             <table>
@@ -16,67 +45,28 @@ function TablaSabores() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Fresa</td>
-                        <td>Bizcocho sabor fresa, sólo para pasteles prediseñados, no personalizados</td>
-                        <td>
-                            <div className='left-space'>
-                            <button className='button-TP'>
-                                <img src={Edit} alt="Editar" className='icon-s' />
-                            </button>
-                            <button className='button-TP'>
-                              <img src={Trash} alt="Borrar" className='icon-s' />  
-                            </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Chocolate</td>
-                        <td>Bizcocho sabor chocolate, para todo tipo de pastel</td>
-                        <td>
-                            <div className='left-space'>
-                            <button className='button-TP'>
-                                <img src={Edit} alt="Editar" className='icon-s' />
-                            </button>
-                            <button className='button-TP'>
-                              <img src={Trash} alt="Borrar" className='icon-s' />  
-                            </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Vainilla</td>
-                        <td>Bizcocho sabor vainilla, para todo tipo de pastel</td>
-                        <td>
-                            <div className='left-space'>
-                            <button className='button-TP'>
-                                <img src={Edit} alt="Editar" className='icon-s' />
-                            </button>
-                            <button className='button-TP'>
-                              <img src={Trash} alt="Borrar" className='icon-s' />  
-                            </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Red Velvet</td>
-                        <td>Bizcocho sabor red velvet, para todo tipo de pastel</td>
-                        <td>
-                            <div className='left-space'>
-                            <button className='button-TP'>
-                                <img src={Edit} alt="Editar" className='icon-s' />
-                            </button>
-                            <button className='button-TP'>
-                              <img src={Trash} alt="Borrar" className='icon-s' />  
-                            </button>
-                            </div>
-                        </td>
-                    </tr>
-                    
+                    {sabores.map((sabor) => (
+                        <tr key={sabor.id_sabor}>
+                            <td>{sabor.id_sabor}</td>
+                            <td>{sabor.nombre_sabor}</td>
+                            <td>{sabor.descripcion}</td>
+                            <td>
+                                <div className="left-space">
+                                    <button
+                                        className="button-TP"
+                                    >
+                                        <img src={Edit} alt="Editar" className="icon-s" />
+                                    </button>
+                                    <button
+                                        className="button-TP"
+                                        onClick={() => handleDelete(sabor.id_sabor)}
+                                    >
+                                        <img src={Trash} alt="Borrar" className="icon-s" />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <button className="add-product-button">Añadir sabor</button>

@@ -33,8 +33,8 @@ const getInfoTamanos = async (req, res) => {
         }
 
         const tamanos = results.map(tamano => ({
-            id: tamano.id_tamano,
-            nombre: tamano.nombre_tamano,
+            id_tamano: tamano.id_tamano,
+            nombre_tamano: tamano.nombre_tamano,
             descripcion: tamano.descripcion
         }));
 
@@ -55,8 +55,8 @@ const getInfoSabores = async (req, res) => {
         }
 
         const sabores = results.map(sabor => ({
-            id: sabor.id_sabor,
-            nombre: sabor.nombre_sabor,
+            id_sabor: sabor.id_sabor,
+            nombre_sabor: sabor.nombre_sabor,
             descripcion: sabor.descripcion
         }));
 
@@ -77,8 +77,8 @@ const getInfoRellenos = async (req, res) => {
         }
 
         const rellenos = results.map(relleno => ({
-            id: relleno.id_relleno,
-            nombre: relleno.nombre_relleno,
+            id_relleno: relleno.id_relleno,
+            nombre_relleno: relleno.nombre_relleno,
             descripcion: relleno.descripcion
         }));
 
@@ -99,9 +99,9 @@ const getInfoProductos = async (req, res) => {
         }
 
         const productos = results.map(producto => ({
-            id: producto.id_producto,
-            imagen : producto.imagen,
-            nombre: producto.nombre_producto,
+            id_producto: producto.id_producto,
+            imagen : producto.imagen ? `data:image/jpeg;base64,${producto.imagen.toString('base64')}` : '',
+            nombre_producto: producto.nombre_producto,
             id_categoria: producto.id_categoria,
             descripcion: producto.descripcion,
             precio : producto.precio,
@@ -119,23 +119,24 @@ const getInfoPedidos = async (req, res) => {
     try {
         const results = await obtener_pedido();
 
+        const estadoMap = {
+            pendiente: 'pendiente',
+            'en proceso': 'en proceso',
+            entregado: 'entregado',
+            cancelado: 'cancelado'
+        };
+
         if (results.length === 0) {
             return res.status(404).json({ error: 'No se encontraron los pedidos' });
         }
 
         const pedidos = results.map(pedido => ({
-            id: pedido.id_pedido,
+            id_pedido: pedido.id_pedido,
             id_cliente: pedido.id_cliente,
             fecha_pedido: pedido.fecha_pedido,
             fecha_entrega: pedido.fecha_entrega,
-            pago : pedido.pago,
-            estado: producto.estado === 'pendiente' 
-            ? 'pendiente' 
-            : producto.estado === 'en proceso' 
-            ? 'en proceso'
-            : producto.estado === 'entregado'
-            ? 'entregado'
-            : 'cancelado'
+            pago : pedido.pago === 'realizado' ? 'realizado' : 'pendiente',
+            estado: estadoMap[pedido.estado] || 'desconocido'
         }));
 
         res.json(pedidos);
@@ -155,12 +156,12 @@ const getInfoUsuarios = async (req, res) => {
         }
 
         const usuarios = results.map(usuario => ({
-            id: usuario.id_cliente,
-            nombre: usuario.nombre_completo,
+            id_cliente: usuario.id_cliente,
+            nombre_completo: usuario.nombre_completo,
             email: usuario.email,
             telefono: usuario.telefono,
             direccion: usuario.direccion,
-            tipo : usuario.tipo ? 'admin' : 'cliente'
+            tipo: usuario.tipo === 'admin' ? 'admin' : 'cliente'
         }));
 
         res.json(usuarios);
