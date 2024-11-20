@@ -1,5 +1,5 @@
 const db = require('../db'); // Se ocupa la conexión a la base de datos
-const generateToken = require('../libs/jwt.js');
+const generateToken = require('../libs/jwt.js'); // Se ocupa la generación de tokens
 const User = require('../models/user.model.js'); // Se ocupa el modelo de usuario
 const bcrypt = require('bcryptjs'); //encriptacion de las contraseñas
 require('dotenv').config();
@@ -17,15 +17,10 @@ const login = async (req, res) => {
         if (isMatch) {
             const token = generateToken(user);
             res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-            return res.json({ success: true, message: 'Inicio de sesión exitoso', 
-                user: {
-                nombreCompleto: user['nombre completo'],
-                email: user.email,
-                tipo: user.tipo,  // Incluye el rol en la respuesta
-            } });
+            return res.json({ success: true, message: 'Inicio de sesión exitoso',  user });
         } else {
             return res.status(401).json({ success: false, message: 'Credenciales incorrectas' });
-        }
+        } 
 
 
     } catch (err) {
@@ -50,13 +45,31 @@ const register = async (req, res) => {
         return res.status(500).json({ success: false, message: 'Error en el servidor' });
     }
 };
+
 const logout = (req, res) => {
     res.clearCookie('token');
     return res.json({ success: true, message: 'Sesión cerrada' });
 };
 
+const profile = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const results = await User.findById(userId);
+        if (results.length === 0) {
+            return res.status(404).json({ success: false, message: 'Usuario no encontrado' });
+        }
+        const user = results[0];
+        return res.json({ success: true, user });
+    } catch (err) {
+        console.error('Error en la consulta:', err);
+        return res.status(500).json({ success: false, message: 'Error en el servidor' });
+    }
+};
+
+
 module.exports = {
     login,
     register,
-    logout
+    logout,
+    profile
 };

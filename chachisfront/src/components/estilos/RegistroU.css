@@ -72,3 +72,16 @@ label {
     margin-top: 1rem;
     font-weight: bold;
 }
+.back-button {
+    font-family: "Century Gothic", sans-serif;
+    background-color: #D9412C; 
+    color: white;
+    border: none;
+    padding: 5px; /* Reducir el padding */
+    width: 30%; /* Reducir el ancho */
+    border-radius: 8px;
+    font-size: 0.875rem; /* Reducir el tamaño de la fuente */
+    cursor: pointer;
+    margin-top: 0.5rem; /* Reducir el margen superior */
+    font-weight: bold;
+}

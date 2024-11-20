@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { AuthProvider, AuthContext } from './components/AuthContext';
 import Header from './components/Header.js'; 
 import MenuHeader from './components/Menu-Header.js';
 import MenuAdmin from './components/HeaderAdmin.js';
@@ -19,31 +20,6 @@ import PP from './components/ProcederPago.js';
 import PA from './components/PerfilAdmin.js'; //Para acceder a la página del administrador
 import './App.css';
 
-function App() {
-    return (
-        <Router>
-            <div className="App">
-                <ConditionalHeader />
-                <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/menu" element={<Menu />} />
-                    <Route path="/chatbot" element={<ChatBot />} />
-                    <Route path="/bday" element={<Cumple />} />
-                    <Route path="/infantil" element={<Infantil />} />
-                    <Route path='/perfil' element={<Perfil />} />
-                    <Route path='/cambiar' element={<Cambiar />} />
-                    <Route path='/pedidos' element={<Pedido />} />
-                    <Route path='/personalizado' element={<Personalizado />} />
-                    <Route path='/wedding' element={<Wedding />} />
-                    <Route path='/add' element={<Agregar />}/>
-                    <Route path='/PP' element={<PP />}/>
-                    <Route path='/pa' element={<PA/>} />
-                </Routes>
-                <ConditionalChatBot />
-            </div>
-        </Router>
-    );
-}
 
 function ConditionalHeader() {
     const location = useLocation();
@@ -51,13 +27,47 @@ function ConditionalHeader() {
     if (location.pathname === "/menu") {
         return <MenuHeader />;
     }
-
-    if (location.pathname === "/pa") {
+    if (location.pathname === "/PA") {
         return <MenuAdmin />;
     }
-
-    
     return <Header />;
+}
+
+function App() {
+    return (
+        <AuthProvider>
+            <Router>
+            <div className="App">
+                <ConditionalHeader />
+                <Routes>
+
+                <Route path="/" element={<Main />} />
+                        <Route path="/menu" element={<Menu />} />
+                        <Route path="/chatbot" element={<ChatBot />} />
+                        <Route path="/bday" element={<Cumple />} />
+                        <Route path="/infantil" element={<Infantil />} />
+                        <Route path='/perfil' element={<PrivateRoute><Perfil/></PrivateRoute>} />
+                        <Route path='/cambiar' element={<PrivateRoute><Cambiar /></PrivateRoute>} />
+                        <Route path='/pedidos' element={<PrivateRoute><Pedido /></PrivateRoute>} />
+                        <Route path='/personalizado' element={<PrivateRoute><Personalizado /></PrivateRoute>} />
+                        <Route path='/wedding' element={<PrivateRoute><Wedding /></PrivateRoute>} />
+                        <Route path='/add' element={<PrivateRoute><Agregar /></PrivateRoute>} />
+                        <Route path='/PP' element={<PrivateRoute><PP /></PrivateRoute>} />
+                        <Route path='/PA' element={<PrivateRoute><PA /></PrivateRoute>} />
+
+                </Routes>
+                <ConditionalChatBot />
+            </div>
+        </Router>
+        </AuthProvider>
+    );
+}
+
+
+function PrivateRoute({ children }) {
+    const { isAuthenticated } = React.useContext(AuthContext);
+
+    return isAuthenticated ? children : <Navigate to="/" />;
 }
 
 function ConditionalChatBot() {
