@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './estilos/PerfilUser.css';
 import edit from './icons/edit-icon.png'
 import add from './icons/add-icon.png'
@@ -7,7 +7,39 @@ import process from './icons/process-icon.png'
 import cake from './icons/cake-icon.png'
 import { Link } from 'react-router-dom';
 
+
 function Perfil() {
+
+    const [userData, setUserData] = useState({
+        nombreCompleto: '',
+        email: '',
+        telefono: '',
+        direccion: ''
+    });
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const email = localStorage.getItem('userEmail'); // Recupera el email desde localStorage
+                const response = await fetch(`http://localhost:4000/api/usuario?email=${encodeURIComponent(email)}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include', 
+                }); 
+    
+                const data = await response.json();
+                setUserData(data);
+            } catch (error) {
+                console.error('Error al obtener datos del usuario', error);
+            }
+        };
+    
+        fetchUserData();
+    }, []);
+    
+
     const handleLogout = async () => {
         try {
             const response = await fetch('http://localhost:4000/api/logout', {
@@ -36,35 +68,45 @@ function Perfil() {
                 <form>
                 <p className='page-texto izquierdo'>Nombre completo</p>
                     <div className="input-group">
-                        <input className="input-edit izquierdo" type="text" placeholder="Nombre Completo" required />
+                        <input className="input-edit izquierdo" 
+                        type="text" placeholder="Nombre Completo" 
+                        value={userData.nombreCompleto} onChange={(e) => setUserData({ ...userData, nombre: e.target.value })} required />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
                         </button>
                     </div>
                     <p className='page-texto izquierdo'>Correo Electrónico</p>
                     <div className="input-group">
-                        <input className="input-edit" type="email" placeholder="Correo Electrónico" required />
+                        <input className="input-edit" 
+                        type="email" placeholder="Correo Electrónico"
+                        value={userData.email} onChange={(e) => setUserData({ ...userData, email: e.target.value })} required />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
                         </button>
                     </div>
                     <p className='page-texto izquierdo'>Teléfono</p>
                     <div className="input-group">
-                        <input className="input-edit" type="tel" placeholder="Teléfono" required />
+                        <input className="input-edit" 
+                        type="tel" placeholder="Teléfono" 
+                        value={userData.telefono} onChange={(e) => setUserData({ ...userData, telefono: e.target.value })} required />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
                         </button>
                     </div>
                     <p className='page-texto izquierdo'>Dirección</p>
                     <div className="input-group">
-                        <input className="input-edit" type="text" placeholder="Dirección" required />
+                        <input className="input-edit" 
+                        type="text" placeholder="Dirección"
+                        value={userData.direccion}  onChange={(e) => setUserData({ ...userData, direccion: e.target.value })} required />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
                         </button>
                     </div>
                     <p className='page-texto izquierdo'>Contraseña</p>
                     <div className="input-group">
-                        <input className="input-edit" type="password" placeholder="Contraseña" required />
+                        <input className="input-edit" 
+                        type="password" placeholder="Contraseña"
+                        value={userData.password} onChange={(e) => setUserData({ ...userData, password: e.target.value })} required />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
                         </button>

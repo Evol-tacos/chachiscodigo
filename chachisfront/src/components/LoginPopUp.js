@@ -22,8 +22,14 @@ function Login({ isOpen, onClose, onOpenRegister, onOpenConfirm }) {
 
             const data = await response.json();
             if (response.ok) {
+                localStorage.setItem('userEmail', email); // Guardar el email en localStorage
+                localStorage.setItem('userTipo', data.user.tipo)
                 // Redirigir o realizar alguna acción después del inicio de sesión exitoso
-                window.location.href = '/perfil';
+                if (data.user.tipo === 'admin') {
+                    window.location.href = '/PA';  // Redirigir al panel de administrador
+                } else {
+                    window.location.href = '/perfil'; // Redirigir al panel de cliente
+                }
             } else {
                 // Manejar errores
                 console.error(data.message);

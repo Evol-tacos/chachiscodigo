@@ -1,63 +1,113 @@
 .addcarrito-popup {
     position: fixed;
-    top: 50%;
-    left: 42%;
-    width: 35%;
-    height: 80%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    right: 0;
+    width: 30vw; /* Ocupa la mitad de la pantalla */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
     background-color: #fffae8;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0; /* Elimina el borde redondeado para alinearlo con los bordes de la pantalla */
+    box-shadow: -5px 0px 50px rgba(0, 0, 0, 0.2); /* Sombra en el borde izquierdo */
+    overflow: hidden;
     font-family: "Century Gothic", sans-serif;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     z-index: 1000;
-    padding: 5px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .close-button-addCart {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
+    margin: 0;
+    margin-left: 20rem;
+    margin-top: 0.5rem;
 }
 
 .close-icon-addCart {
-    margin-top: 0.3px;
-    width: 30px;
+    width: 35px;
     height: 30px;
 }
 
-.cake-img-cart {
-    width: 30%;
-    height: 30%;
-    border-radius: 5px;
-    margin-top: 5rem;
-    object-fit: cover;
-}
-
-.popup-title {
-    font-size: 0.6rem;
-    font-weight: bold;
-    margin: 2px 0;
+.AC-description {
+    margin-top: 0.5rem;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 0.7rem;
     text-align: center;
+    color: #161616;
+    margin: 0;
 }
 
-.pagar-button-cart{
-    width: 80%;
+.img-container-ac {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center;
+}
+
+.cake-img-AC {
+    width: 30%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.AC-title-price {
+    display: flex; /* Activa flexbox */
+    justify-content: space-between; /* Espacia elementos hacia los extremos */
+    align-items: center; /* Alinea verticalmente al centro */
+    margin: 0 2rem; /* Añade espacio a los lados */
+    margin-bottom: 0.5rem;
+}
+
+.AC-title {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0; /* Elimina márgenes por defecto */
+    text-align: left; /* Alinea texto a la izquierda */
+}
+
+.AC-price {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #D9412C;
+    text-align: right; /* Alinea texto a la derecha */
+    margin: 0; /* Elimina márgenes por defecto */
+}
+
+
+.pagar-button-AC{
+    margin-left: 6rem;
+    margin-top: -0.2rem;
+    font-family: "Century Gothic";
+    height: 5%;
+    width: 50%;
     padding: 3px;
     background-color: #d9534f;
     color: white;
     border: none;
     border-radius: 4px;
-    font-size: 0.6rem;
+    font-weight: bold;
+    font-size: 0.7rem;
     cursor: pointer;
     text-align: center;
+}
+
+.select-AC ,.input-pedido-AC {
+    width: 100%;
+    max-width: 350px;
+    padding: 12px;
+    font-size: 12px;
+    color: #7b4f2e;
+    border: 1px solid #d4a373;
+    border-radius: 8px;
+    background-color: #f5e1c6;
+    outline: none;
+    font-family: 'Century Gothic', sans-serif;
+    margin-bottom: 1.5rem;
+}
+
+.closer {
+    margin-top: -2rem;
 }

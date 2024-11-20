@@ -1,6 +1,5 @@
 import './estilos/Pedidos.css';
 import React, {useState} from 'react';
-//import upload from './icons/upload-icon.png';
 
 
 function Perfil() {
