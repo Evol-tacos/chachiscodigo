@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './estilos/RegistroU.css';
 import logo from './icons/logo-png.png';
-import back from './icons/back-icon.png';
+import back from './icons/backwards.png';
 
 function RegistroU({ isOpen, onClose, openLogin }) {
     const [nombrecompleto, setNombreCompleto] = useState('');
