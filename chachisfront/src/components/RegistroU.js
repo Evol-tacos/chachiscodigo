@@ -44,6 +44,12 @@ function RegistroU({ isOpen, onClose, openLogin }) {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="close-button" onClick={onClose}>X</button>
+                <button className="back-button" onClick={() => {
+                    onClose(); // Cierra el modal de registro
+                    openLogin(); // Abre el modal de login
+                }}>
+                    <img src={back} alt="Atrás" className='back-button'/>
+                </button>
                 <img src={logo} alt="Chachis Pastelería Logo" className="modal-logo-reg" />
 
                 <p className='registrarse'>¡Regístrate en Chachis Pastelería!</p>
@@ -90,7 +96,7 @@ function RegistroU({ isOpen, onClose, openLogin }) {
                         placeholder="Confirmar Contraseña"
                         required
                     />
-                    <button type="submit" className="register-button">Registrarme</button>
+                    <button type="submit" className="register-button">Registrarse</button>
                 </form>
             </div>
         </div>

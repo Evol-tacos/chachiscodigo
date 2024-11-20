@@ -1,112 +1,58 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { AuthContext } from './AuthContext.js';
 import './estilos/PerfilUser.css';
-import edit from './icons/edit-icon.png'
+import edit from './icons/edit-icon.png';
+import { Link } from 'react-router-dom';
 import add from './icons/add-icon.png'
 import pendiente from './icons/pay-icon.png'
 import process from './icons/process-icon.png'
 import cake from './icons/cake-icon.png'
-import { Link } from 'react-router-dom';
 
 
 function Perfil() {
-
-    const [userData, setUserData] = useState({
-        nombreCompleto: '',
-        email: '',
-        telefono: '',
-        direccion: ''
-    });
-
+    const { handleLogout, user } = useContext(AuthContext);
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const email = localStorage.getItem('userEmail'); // Recupera el email desde localStorage
-                const response = await fetch(`http://localhost:4000/api/usuario?email=${encodeURIComponent(email)}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include', 
-                }); 
-    
-                const data = await response.json();
-                setUserData(data);
-            } catch (error) {
-                console.error('Error al obtener datos del usuario', error);
-            }
-        };
-    
-        fetchUserData();
-    }, []);
-    
-
-    const handleLogout = async () => {
-        try {
-            const response = await fetch('http://localhost:4000/api/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include', // Esto asegura que las cookies se envíen con la solicitud
-            });
-
-            if (response.ok) {
-                // Redirigir al usuario a la página de inicio de sesión o a la página principal
-                window.location.href = '/login';
-            } else {
-                console.error('Error al cerrar sesión');
-            }
-        } catch (error) {
-            console.error('Error:', error);
+        if (!user) {
+            // Redirigir al usuario a la página principal si no está autenticado
+            window.location.href = '/';
         }
-    };
+    }, [user]);
+
+    if (!user) {
+        return <div>Cargando...</div>;
+    }
 
     return (
         <div className="page-container">
             <div className="page-content-form">
                 <p className='page-title espacio'>Mi cuenta</p> 
                 <form>
-                <p className='page-texto izquierdo'>Nombre completo</p>
+                    <p className='page-texto izquierdo'>Nombre completo</p>
                     <div className="input-group">
-                        <input className="input-edit izquierdo" 
-                        type="text" placeholder="Nombre Completo" 
-                        value={userData.nombreCompleto} onChange={(e) => setUserData({ ...userData, nombre: e.target.value })} required />
+
+                        <input className="input-edit izquierdo" type="text" placeholder="Nombre Completo" value={user.nombrecompleto} readOnly />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
                         </button>
                     </div>
                     <p className='page-texto izquierdo'>Correo Electrónico</p>
                     <div className="input-group">
-                        <input className="input-edit" 
-                        type="email" placeholder="Correo Electrónico"
-                        value={userData.email} onChange={(e) => setUserData({ ...userData, email: e.target.value })} required />
+
+                        <input className="input-edit" type="email" placeholder="Correo Electrónico" value={user.email} readOnly />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
                         </button>
                     </div>
                     <p className='page-texto izquierdo'>Teléfono</p>
                     <div className="input-group">
-                        <input className="input-edit" 
-                        type="tel" placeholder="Teléfono" 
-                        value={userData.telefono} onChange={(e) => setUserData({ ...userData, telefono: e.target.value })} required />
+                        <input className="input-edit" type="tel" placeholder="Teléfono" value={user.telefono} readOnly />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
                         </button>
                     </div>
                     <p className='page-texto izquierdo'>Dirección</p>
                     <div className="input-group">
-                        <input className="input-edit" 
-                        type="text" placeholder="Dirección"
-                        value={userData.direccion}  onChange={(e) => setUserData({ ...userData, direccion: e.target.value })} required />
-                        <button type='button' className='edit-button'>
-                            <img src={edit} alt='Editar' className='edit-icon' />
-                        </button>
-                    </div>
-                    <p className='page-texto izquierdo'>Contraseña</p>
-                    <div className="input-group">
-                        <input className="input-edit" 
-                        type="password" placeholder="Contraseña"
-                        value={userData.password} onChange={(e) => setUserData({ ...userData, password: e.target.value })} required />
+                        <input className="input-edit" type="text" placeholder="Dirección" value={user.direccion} readOnly />
                         <button type='button' className='edit-button'>
                             <img src={edit} alt='Editar' className='edit-icon' />
                         </button>
