@@ -34,18 +34,18 @@ function App() {
             <div className="App">
                 <ConditionalHeader />
                 <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/menu" element={<Menu />} />
-                    <Route path="/chatbot" element={<ChatBot />} />
-                    <Route path="/bday" element={<Cumple />} />
-                    <Route path="/infantil" element={<Infantil />} />
-                    <Route path='/perfil' element={<Perfil />} />
-                    <Route path='/cambiar' element={<Cambiar />} />
-                    <Route path='/pedidos' element={<Pedido />} />
-                    <Route path='/personalizado' element={<Personalizado />} />
-                    <Route path='/wedding' element={<Wedding />} />
-                    <Route path='/add' element={<Agregar />}/>
-                    <Route path='/PP' element= {<PP />}/>
+                <Route path="/" element={<Main />} />
+                        <Route path="/menu" element={<Menu />} />
+                        <Route path="/chatbot" element={<ChatBot />} />
+                        <Route path="/bday" element={<Cumple />} />
+                        <Route path="/infantil" element={<Infantil />} />
+                        <Route path='/perfil' element={<PrivateRoute><Perfil/></PrivateRoute>} />
+                        <Route path='/cambiar' element={<PrivateRoute><Cambiar /></PrivateRoute>} />
+                        <Route path='/pedidos' element={<PrivateRoute><Pedido /></PrivateRoute>} />
+                        <Route path='/personalizado' element={<PrivateRoute><Personalizado /></PrivateRoute>} />
+                        <Route path='/wedding' element={<PrivateRoute><Wedding /></PrivateRoute>} />
+                        <Route path='/add' element={<PrivateRoute><Agregar /></PrivateRoute>} />
+                        <Route path='/PP' element={<PrivateRoute><PP /></PrivateRoute>} />
                 </Routes>
 
                 <ChatBotIcon />
@@ -58,7 +58,7 @@ function App() {
 function PrivateRoute({ children }) {
     const { isAuthenticated } = React.useContext(AuthContext);
 
-    return isAuthenticated ? children : <Navigate to="/login" />;
+    return isAuthenticated ? children : <Navigate to="/" />;
 }
 
 export default App;
