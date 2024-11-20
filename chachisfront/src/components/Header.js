@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from './AuthContext.js';
 import otherlogo from './icons/logo-png.png';
 import tipografia from './icons/Chachis-tipografia.png';
@@ -48,6 +48,7 @@ function Header() {
     const closeChange = () => setIsChangeOpen(false);
 
     const { isAuthenticated, handleLogout, userName } = useContext(AuthContext);
+    const location = useLocation();
 
 
     return (
@@ -67,7 +68,9 @@ function Header() {
                     <>
                         <img src={iconoUser} alt="Usuario" className="user-icon" />
                         <span className="user-name">{userName}</span>
-                        <span onClick={handleLogout} className="login-text">Cerrar sesión</span>
+                        {location.pathname !== '/perfil' && (
+                            <span onClick={handleLogout} className="login-text">Cerrar sesión</span>
+                        )}
                     </>
                 ) : (
                     <span onClick={openLogin} className="login-text">Iniciar sesión</span>

@@ -59,3 +59,9 @@ nav a {
     margin-right: 15px;
     margin-left: 15px;
 }
+.user-icon {
+    width: 30px; /* Ajusta el ancho según sea necesario */
+    height: 30px; /* Ajusta la altura según sea necesario */
+    border-radius: 50%; /* Esto hará que la imagen sea circular */
+    margin-right: 0.5rem; /* Añadir un margen para separar la imagen del texto */
+}

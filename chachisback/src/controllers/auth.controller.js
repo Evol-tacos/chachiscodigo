@@ -15,9 +15,9 @@ const login = async (req, res) => {
         const user = results[0];
         const isMatch = await bcrypt.compare(password, user.contrasena);
         if (isMatch) {
-            const token = generateToken(User);
+            const token = generateToken(user);
             res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-            return res.json({ success: true, message: 'Inicio de sesión exitoso', userName: user.nombrecompleto });
+            return res.json({ success: true, message: 'Inicio de sesión exitoso',  user });
         } else {
             return res.status(401).json({ success: false, message: 'Credenciales incorrectas' });
         }
@@ -49,8 +49,19 @@ const logout = (req, res) => {
     return res.json({ success: true, message: 'Sesión cerrada' });
 };
 
-const profile = (req, res) => {
-    return res.json({ success: true, message: 'Perfil de usuario' });
+const profile = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const results = await User.findById(userId);
+        if (results.length === 0) {
+            return res.status(404).json({ success: false, message: 'Usuario no encontrado' });
+        }
+        const user = results[0];
+        return res.json({ success: true, user });
+    } catch (err) {
+        console.error('Error en la consulta:', err);
+        return res.status(500).json({ success: false, message: 'Error en el servidor' });
+    }
 };
 
 

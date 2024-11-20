@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './estilos/Login.css';
 import logo from './icons/logo-png.png';
 import { AuthContext } from './AuthContext.js';
@@ -6,7 +7,8 @@ import { AuthContext } from './AuthContext.js';
 function Login({ isOpen, onClose, onOpenRegister, onOpenConfirm }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { setIsAuthenticated, setUserName } = useContext(AuthContext);
+    const { setIsAuthenticated, setUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     if (!isOpen) return null;
 
@@ -23,12 +25,12 @@ function Login({ isOpen, onClose, onOpenRegister, onOpenConfirm }) {
             });
 
             const data = await response.json();
-            if (response.ok) {
+            if (response.ok && data.user) {
                 setIsAuthenticated(true);
-                setUserName(data.userName);
-                localStorage.setItem('userName', data.userName);
-                // Redirigir o realizar alguna acción después del inicio de sesión exitoso
-                window.location.reload(); // Refrescar la página para reflejar los cambios
+                setUser(data.user);
+                localStorage.setItem('userName', data.user.nombrecompleto);
+                // Redirigir a la página del menú después del inicio de sesión exitoso
+                navigate('/menu');
             } else {
                 // Manejar errores
                 console.error(data.message);
