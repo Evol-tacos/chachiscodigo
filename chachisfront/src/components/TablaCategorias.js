@@ -1,9 +1,43 @@
-import React from 'react';
-import './estilos/Tablas.css';
-import Edit from './icons/edit-icon.png';
-import Trash from './icons/trash-icon.png';
+import React, { useState, useEffect } from "react";
+import "./estilos/Tablas.css";
+import Edit from "./icons/edit-icon.png";
+import Trash from "./icons/trash-icon.png";
 
 function TablaCategorias() {
+    const [categorias, setCategorias] = useState([]);
+
+    useEffect(() => {
+        const fetchCategorias = async () => {
+            try {
+                const response = await fetch("http://localhost:4000/api/categorias");
+                const data = await response.json();
+                console.log(data);
+                setCategorias(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error("Error al obtener las categorías", error);
+                setCategorias([]);
+            }
+        };
+        fetchCategorias();
+    }, []);
+
+    const onDelete = async (tabla, id) => {
+        try {
+            const response = await fetch(`http://localhost:4000/api/${tabla}/${id}`, {
+                method: "DELETE",
+            });
+            const data = await response.json();
+            if(!response.ok) {
+                throw new Error(data.error || 'Error al borrar el elemento');
+            }
+            setCategorias((prevCategorias) =>
+                prevCategorias.filter((categoria) => categoria.id_categoria !== id)
+            ); 
+        } catch (error) {
+            console.error("Error al borrar el elemento", error);
+        }
+    };
+
     return (
         <div>
             <table>
@@ -16,67 +50,28 @@ function TablaCategorias() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Infantil</td>
-                        <td>Pasteles diseñados para las celebraciones de los más pequeños</td>
-                        <td>
-                            <div className='left-space'>
-                            <button className='button-TP'>
-                                <img src={Edit} alt="Editar" className='icon-s' />
-                            </button>
-                            <button className='button-TP'>
-                              <img src={Trash} alt="Borrar" className='icon-s' />  
-                            </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Boda</td>
-                        <td>Pasteles diseñados para las nuevas parejas</td>
-                        <td>
-                            <div className='left-space'>
-                            <button className='button-TP'>
-                                <img src={Edit} alt="Editar" className='icon-s' />
-                            </button>
-                            <button className='button-TP'>
-                              <img src={Trash} alt="Borrar" className='icon-s' />  
-                            </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Cumpleaños</td>
-                        <td>Pasteles diseñados para celebraciones de todas las edades</td>
-                        <td>
-                            <div className='left-space'>
-                            <button className='button-TP'>
-                                <img src={Edit} alt="Editar" className='icon-s' />
-                            </button>
-                            <button className='button-TP'>
-                              <img src={Trash} alt="Borrar" className='icon-s' />  
-                            </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Personalizado</td>
-                        <td>Pasteles para cualquier tipo de ocasión</td>
-                        <td>
-                            <div className='left-space'>
-                            <button className='button-TP'>
-                                <img src={Edit} alt="Editar" className='icon-s' />
-                            </button>
-                            <button className='button-TP'>
-                              <img src={Trash} alt="Borrar" className='icon-s' />  
-                            </button>
-                            </div>
-                        </td>
-                    </tr>
-                    
+                    {categorias.map((categoria) => (
+                        <tr key={categoria.id_categoria}>
+                            <td>{categoria.id_categoria}</td>
+                            <td>{categoria.nombre_categoria}</td>
+                            <td>{categoria.descripcion}</td>
+                            <td>
+                                <div className="left-space">
+                                    <button
+                                        className="button-TP"
+                                    >
+                                        <img src={Edit} alt="Editar" className="icon-s" />
+                                    </button>
+                                    <button
+                                        className="button-TP"
+                                        onClick={() => onDelete("categorias", categoria.id_categoria)}
+                                    >
+                                        <img src={Trash} alt="Borrar" className="icon-s" />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <button className="add-product-button">Añadir categoría</button>

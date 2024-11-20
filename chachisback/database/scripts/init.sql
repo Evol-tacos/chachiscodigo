@@ -7,7 +7,7 @@ CREATE TABLE `categoria` (
   `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_categoria` varchar(100) NOT NULL,
   `descripcion` text NOT NULL,
-  `estado` tinyint(1) DEFAULT 1,
+  `estado` enum('activo','inactivo') DEFAULT 'activo',
   PRIMARY KEY (`id_categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -24,15 +24,6 @@ CREATE TABLE `clientes` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `inventario` (
-  `id_ingrediente` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre_ingrediente` varchar(100) NOT NULL,
-  `cantidad` decimal(10,2) NOT NULL,
-  `cantidad_min` decimal(10,2) NOT NULL,
-  `unidad` enum('kg','g','l','ml','pz') NOT NULL,
-  PRIMARY KEY (`id_ingrediente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_producto` varchar(100) NOT NULL,
@@ -40,13 +31,13 @@ CREATE TABLE `producto` (
   `id_categoria` int(11) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `estado` tinyint(1) DEFAULT 1,
+  `estado` enum('activo','inactivo') DEFAULT 'activo',
   PRIMARY KEY (`id_producto`),
   KEY `id_categoria` (`id_categoria`),
   CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `pedido` (
+CREATE TABLE `pedido` ( 
   `id_pedido` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) NOT NULL,
   `fecha_pedido` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -59,21 +50,51 @@ CREATE TABLE `pedido` (
   CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE sabores (
+  `id_sabor` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_sabor` varchar(100) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `estado` enum('activo','inactivo') DEFAULT 'activo',
+  PRIMARY KEY (`id_sabor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE rellenos (
+  `id_relleno` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_relleno` varchar(100) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `estado` enum('activo','inactivo') DEFAULT 'activo',
+PRIMARY KEY (`id_relleno`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE tamanos (
+`id_tamano` int(11) NOT NULL AUTO_INCREMENT,
+`nombre_tamano` varchar(100) NOT NULL,
+`descripcion` text DEFAULT NULL,
+`estado` enum('activo','inactivo') DEFAULT 'activo',
+PRIMARY KEY (`id_tamano`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 CREATE TABLE `detallepedido` (
   `id_detalle` int(11) NOT NULL AUTO_INCREMENT,
   `id_pedido` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
-  `sabor` varchar(100) NOT NULL,
-  `relleno` varchar(100) NOT NULL,
-  `tamano` varchar(100) NOT NULL,
+  `id_sabor` int(11) NOT NULL,
+  `id_relleno` int(11) NOT NULL,
+  `id_tamano` int(11) NOT NULL,
   `instrucciones` text DEFAULT NULL,
   `mensaje` varchar(20) DEFAULT NULL,
   `img_ref` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_detalle`),
   KEY `id_pedido` (`id_pedido`),
   KEY `id_producto` (`id_producto`),
+  KEY `id_sabor` (`id_sabor`),
+  KEY `id_relleno` (`id_relleno`),
+  KEY `id_tamano` (`id_tamano`),
   CONSTRAINT `detallepedido_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`),
-  CONSTRAINT `detallepedido_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`)
+  CONSTRAINT `detallepedido_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`),
+  CONSTRAINT `detallepedido_ibfk_3` FOREIGN KEY (`id_sabor`) REFERENCES `sabores` (`id_sabor`),
+  CONSTRAINT `detallepedido_ibfk_4` FOREIGN KEY (`id_relleno`) REFERENCES `rellenos` (`id_relleno`),
+  CONSTRAINT `detallepedido_ibfk_5` FOREIGN KEY (`id_tamano`) REFERENCES `tamanos` (`id_tamano`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 COMMIT;
