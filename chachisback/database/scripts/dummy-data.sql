@@ -4,6 +4,7 @@ SET time_zone = "+00:00";
 
 -- Insertar datos en la tabla clientes
 INSERT INTO `clientes` (`nombre completo`, `email`, `telefono`, `direccion`, `contrasena`,`tipo`, `fecha_creacion`) VALUES
+('admin', 'admin@admin.com', '6623058940', 'admin', '$2a$10$j0QgK/l/9zy4sUflJBwz3OcxBaGF.dQU.1FtMWWyMYF3Lbb/PEQXi', 'admin', '2024-11-20 14:03:56'),
 ('bryant', 'prueba@prueba.com', '6622575633', 'tepic', 'prueba123', 'admin' , '2024-11-15 07:55:49'),
 ('sofia figueroa', 'sofi@prueba.com', '6623712484', 'unison', '$2a$10$vWPLwzJd0YWALUErtP7f0.wZtWNmlvgVBXLfQHGrSqo/9tlB9aeUm', 'cliente', '2024-11-15 09:58:36'),
 ('Tania Berenice Betancourt Laurean', 'tania@prueba.com', ' 6621904035', 'unison', '$2a$10$8x3Td//71zOykde/la8DY.6ty9LRCRhpqBfJR5d6OFPJZnTgJYNVe', 'cliente', '2024-11-15 11:23:54'),
