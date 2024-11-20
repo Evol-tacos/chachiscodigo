@@ -51,27 +51,24 @@ CREATE TABLE `pedido` (
   CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE sabores (
+CREATE TABLE `sabores` (
   `id_sabor` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_sabor` varchar(100) NOT NULL,
   `descripcion` text DEFAULT NULL,
-  `estado` enum('activo','inactivo') DEFAULT 'activo',
   PRIMARY KEY (`id_sabor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE rellenos (
+CREATE TABLE `rellenos` (
   `id_relleno` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_relleno` varchar(100) NOT NULL,
   `descripcion` text DEFAULT NULL,
-  `estado` enum('activo','inactivo') DEFAULT 'activo',
 PRIMARY KEY (`id_relleno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE tamanos (
+CREATE TABLE `tamanos` (
 `id_tamano` int(11) NOT NULL AUTO_INCREMENT,
 `nombre_tamano` varchar(100) NOT NULL,
 `descripcion` text DEFAULT NULL,
-`estado` enum('activo','inactivo') DEFAULT 'activo',
 PRIMARY KEY (`id_tamano`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

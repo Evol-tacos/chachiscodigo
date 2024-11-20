@@ -10,17 +10,15 @@ INSERT INTO `categoria` (`nombre_categoria`, `descripcion`) VALUES
 ('Personalizado', 'Pasteles personalizados');
 
 -- Insertar productos de ejemplo
-INSERT INTO `producto` (`nombre_producto`, `descripcion`, `id_categoria`, `precio`, `cantidad`, `estado`)
-VALUES
+INSERT INTO `producto` (`nombre_producto`, `descripcion`, `id_categoria`, `precio`, `cantidad`, `estado`) VALUES
   ('Pastel de Chocolate', 'Delicioso pastel de chocolate con cobertura de ganache.', 1, 350.00, 10, 'activo'),
   ('Pastel de Fresas', 'Pastel fresco con crema pastelera y fresas naturales.', 1, 400.00, 8, 'activo'),
   ('Pastel Red Velvet', 'Pastel suave de red velvet con crema de queso.', 2, 450.00, 5, 'activo'),
   ('Pastel Tres Leches', 'Clásico pastel tres leches con topping de frutas.', 1, 380.00, 12, 'activo'),
-  ('Pastel de Coco', 'Pastel con sabor tropical de coco y cubierta de merengue.', 1, 300.00, 6, 'activo'),
+  ('Pastel de Coco', 'Pastel con sabor tropical de coco y cubierta de merengue.', 1, 300.00, 6, 'activo');
 
 -- Datos para tabla sabores
 INSERT INTO `sabores` (`nombre_sabor`, `descripcion`) VALUES 
-('Chocolate', 'Sabor tradicional de chocolate'),
 ('Vainilla', 'Sabor clásico de vainilla'),
 ('Red Velvet', 'Sabor especial Red Velvet'),
 ('Café', 'Sabor intenso de café'),
