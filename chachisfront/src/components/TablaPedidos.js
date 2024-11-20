@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./estilos/Tablas.css";
 
 function TablaPedidos() {
   // Estados para gestionar los valores de cada dropdown
-  const [pagos, setPagos] = useState({
-    pedido1: "pendiente",
-    pedido2: "realizado",
-  });
+
+  const [pedidos, setPedidos] = useState([]);
+
+  useEffect(() => {
+    const fetchPedidos = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/pedidos');
+        const data = await response.json();
+        console.log(data);
+        setPedidos(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Error al obtener los pedidos', error);
+        setPedidos([]);
+      }
+    };
+    fetchPedidos();
+  }, []);
 
   // Manejar el cambio de valor en los dropdowns de pago
-  const handlePagoChange = (pedido, nuevoEstado) => {
-    setPagos((prevPagos) => ({ ...prevPagos, [pedido]: nuevoEstado }));
+  const handleCambio = (id_pedido, campo, valor) => {
+    setPedidos((prevPedidos) =>
+      prevPedidos.map((pedido) =>
+        pedido.id_pedido === id_pedido
+          ? { ...pedido, [campo]: valor }
+          : pedido
+      )
+    );
   };
 
   return (
@@ -20,7 +39,6 @@ function TablaPedidos() {
           <tr>
             <th>Número de pedido</th>
             <th>Cliente</th>
-            <th>Número de contacto</th>
             <th>Fecha de pedido</th>
             <th>Fecha de entrega</th>
             <th>Pago</th>
@@ -29,56 +47,34 @@ function TablaPedidos() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>#023</td>
-            <td>Panchita</td>
-            <td>66220117xx</td>
-            <td>15/10/2024</td>
-            <td>15/11/2024</td>
-            <td>
-              <select
-                className={`dropdown pago ${pagos.pedido1}`}
-                value={pagos.pedido1}
-                onChange={(e) => handlePagoChange("pedido1", e.target.value)}
-              >
-                <option value="realizado">Realizado</option>
-                <option value="pendiente">Pendiente</option>
-              </select>
-            </td>
-            <td>
-              <select className="dropdown estado">
-                <option>En proceso</option>
-                <option>Pendiente</option>
-                <option>Completado</option>
-              </select>
-            </td>
-            <td>ver detalles</td>
-          </tr>
-          <tr>
-            <td>#024</td>
-            <td>Fulanito</td>
-            <td>66220117xx</td>
-            <td>30/10/2024</td>
-            <td>18/11/2024</td>
-            <td>
-              <select
-                className={`dropdown pago ${pagos.pedido2}`}
-                value={pagos.pedido2}
-                onChange={(e) => handlePagoChange("pedido2", e.target.value)}
-              >
-                <option value="realizado">Realizado</option>
-                <option value="pendiente">Pendiente</option>
-              </select>
-            </td>
-            <td>
-              <select className="dropdown estado">
-                <option>Pendiente</option>
-                <option>En proceso</option>
-                <option>Completado</option>
-              </select>
-            </td>
-            <td>ver detalles</td>
-          </tr>
+          {pedidos.map((pedido) => (
+            <tr key={pedido.id_pedido}>
+              <td>{pedido.id_pedido}</td>
+              <td>{pedido.id_cliente}</td>
+              <td>{pedido.fecha_pedido}</td>
+              <td>{pedido.fecha_entrega}</td>
+              <td>
+                <select
+                  className={`dropdown pago ${pedido.pago}`}
+                  value={pedido.pago}
+                  onChange={(e) => handleCambio(pedido.id_pedido, "pago", e.target.value)}
+                >
+                  <option value="realizado">Realizado</option>
+                  <option value="pendiente">Pendiente</option>
+                </select>
+              </td>
+              <td>
+                <select className="dropdown estado" value={pedido.estado} 
+                onChange={(e) => handleCambio(pedido.id_pedido, "estado", e.target.value)}>
+                  <option value="en proceso">En proceso</option>
+                  <option value="pendiente">Pendiente</option>
+                  <option value="entregado">Entregado</option>
+                  <option value="cancelado">Cancelado</option>
+                </select>
+              </td>
+              <td>Ver detalles</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

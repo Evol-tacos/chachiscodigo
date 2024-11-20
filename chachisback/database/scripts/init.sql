@@ -13,7 +13,7 @@ CREATE TABLE `categoria` (
 
 CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre completo` varchar(100) NOT NULL,
+  `nombre_completo` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `telefono` varchar(20) NOT NULL,
   `direccion` varchar(100) NOT NULL,
@@ -42,6 +42,7 @@ CREATE TABLE `pedido` (
   `id_cliente` int(11) NOT NULL,
   `fecha_pedido` timestamp NOT NULL DEFAULT current_timestamp(),
   `fecha_entrega` timestamp NOT NULL,
+  `pago` enum('realizado','pendiente') DEFAULT 'pendiente',
   `estado` enum('pendiente','en proceso','entregado','cancelado') NOT NULL DEFAULT 'pendiente',
   `total` decimal(10,2) NOT NULL,
   `comprobante_pago_url` varchar(150) DEFAULT NULL,

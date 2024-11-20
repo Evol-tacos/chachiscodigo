@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./estilos/Tablas.css";
 import Edit from "./icons/edit-icon.png";
 import Trash from "./icons/trash-icon.png";
+import { onDelete } from "../utils/api";
 
 function TablaCategorias() {
     const [categorias, setCategorias] = useState([]);
@@ -11,7 +12,6 @@ function TablaCategorias() {
             try {
                 const response = await fetch("http://localhost:4000/api/categorias");
                 const data = await response.json();
-                console.log(data);
                 setCategorias(Array.isArray(data) ? data : []);
             } catch (error) {
                 console.error("Error al obtener las categorías", error);
@@ -21,20 +21,14 @@ function TablaCategorias() {
         fetchCategorias();
     }, []);
 
-    const onDelete = async (tabla, id) => {
-        try {
-            const response = await fetch(`http://localhost:4000/api/${tabla}/${id}`, {
-                method: "DELETE",
-            });
-            const data = await response.json();
-            if(!response.ok) {
-                throw new Error(data.error || 'Error al borrar el elemento');
-            }
+    const handleDelete = async (id) => {
+        const result = await onDelete("categorias", id);
+        if (result.success) {
             setCategorias((prevCategorias) =>
                 prevCategorias.filter((categoria) => categoria.id_categoria !== id)
-            ); 
-        } catch (error) {
-            console.error("Error al borrar el elemento", error);
+            );
+        } else {
+            console.error("Error al borrar:", result.error);
         }
     };
 
@@ -64,7 +58,7 @@ function TablaCategorias() {
                                     </button>
                                     <button
                                         className="button-TP"
-                                        onClick={() => onDelete("categorias", categoria.id_categoria)}
+                                        onClick={() => handleDelete(categoria.id_categoria)}
                                     >
                                         <img src={Trash} alt="Borrar" className="icon-s" />
                                     </button>

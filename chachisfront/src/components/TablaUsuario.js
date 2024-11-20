@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './estilos/Tablas.css';
+import Edit from "./icons/edit-icon.png";
+import Trash from "./icons/trash-icon.png";
+import { onDelete } from "../utils/api";
 
 function TablaUsuario() {
+    const [clientes, setClientes] = useState([]);
+
+    useEffect(() => {
+        const fetchClientes = async () => {
+            try {
+                const response = await fetch('http://localhost:4000/api/usuarios');
+                const data = await response.json();
+                console.log(data);
+                setClientes(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error('Error al obtener los clientes', error);
+                setClientes([]);
+            }
+        };
+        fetchClientes();
+    }, []);
+
+    const handleDelete = async (id) => {
+        const result = await onDelete("clientes", id);
+        if (result.success) {
+            setClientes((prevClientes) =>
+                prevClientes.filter((cliente) => cliente.id_cliente !== id)
+            );
+        } else {
+            console.error("Error al borrar:", result.error);
+        }
+    };
+
     return (
         <div>
             <table>
@@ -9,32 +40,38 @@ function TablaUsuario() {
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Apellido</th>
                         <th>Email</th>
                         <th>Teléfono</th>
                         <th>Dirección</th>
-                        <th>Contraseña</th>
+                        <th>Tipo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>574386</td>
-                        <td>Panchita</td>
-                        <td>Gómez</td>
-                        <td>panchisg@hotmail.com</td>
-                        <td>66220117xx</td>
-                        <td>Balderrama #57, Col. 5 de Mayo</td>
-                        <td>********</td>
-                    </tr>
-                    <tr>
-                        <td>589387</td>
-                        <td>Maria</td>
-                        <td>Juarez</td>
-                        <td>mjuarez6@hotmail.com</td>
-                        <td>66220117xx</td>
-                        <td>123 #57, Col. 5 de Mayo</td>
-                        <td>********</td>
-                    </tr>
+                    {clientes.map((cliente) => (
+                        <tr key={cliente.id_cliente}>
+                            <td>{cliente.id_cliente}</td>
+                            <td>{cliente.nombre_completo}</td>
+                            <td>{cliente.email}</td>
+                            <td>{cliente.telefono}</td>
+                            <td>{cliente.direccion}</td>
+                            <td>{cliente.tipo}</td>
+                            <td>
+                                <div className="left-space">
+                                    <button
+                                        className="button-TP"
+                                    >
+                                        <img src={Edit} alt="Editar" className="icon-s" />
+                                    </button>
+                                    <button
+                                        className="button-TP"
+                                        onClick={() => handleDelete(cliente.id_cliente)}
+                                    >
+                                        <img src={Trash} alt="Borrar" className="icon-s" />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

@@ -8,11 +8,12 @@ services:
       MYSQL_USER: chachisuser
       MYSQL_PASSWORD: userpassword
       MYSQL_INITDB_SKIP_TZINFO: 1
-      MYSQL_CHARSET: utf8mb4
+      MYSQL_CHARSET: utf8mb4  
     volumes:
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/1-init.sql
       - ./scripts/dummy-data.sql:/docker-entrypoint-initdb.d/2-dummy-data.sql
       - mysql_data:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf 
     ports:
       - "3306:3306"
     networks:

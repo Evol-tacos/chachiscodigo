@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./estilos/Tablas.css";
-import C1 from "./cakes/bday/bday-cake1.png";
 import Edit from "./icons/edit-icon.png";
 import Trash from "./icons/trash-icon.png";
 
 function TablaProductos() {
-  const [productos, setProductos] = useState([
-    {
-      id: 1,
-      imagen: C1,
-      nombre: "Pastel morado",
-      categoria: "Cumpleaños",
-      descripcion: "Hecho para compartir en familia con el amor de mamá",
-      precio: 669,
-    },
-  ]);
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/api/productos");
+        const data = await response.json();
+        setProductos(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error("Error al obtener productos", error);
+        setProductos([]);
+      }
+    };
+    fetchProductos();
+  }, []);
 
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [nuevoProducto, setNuevoProducto] = useState({
@@ -50,7 +54,6 @@ function TablaProductos() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Imagen</th>
             <th>Nombre</th>
             <th>Categoría</th>
             <th>Descripción</th>
@@ -60,13 +63,10 @@ function TablaProductos() {
         </thead>
         <tbody>
           {productos.map((producto) => (
-            <tr key={producto.id}>
-              <td>{producto.id}</td>
-              <td>
-                <img src={producto.imagen} alt={producto.nombre} className="img-s" />
-              </td>
-              <td>{producto.nombre}</td>
-              <td>{producto.categoria}</td>
+            <tr key={producto.id_producto}>
+              <td>{producto.id_producto}</td>
+              <td>{producto.nombre_producto}</td>
+              <td>{producto.id_categoria}</td>
               <td>{producto.descripcion}</td>
               <td>${producto.precio}</td>
               <td>
