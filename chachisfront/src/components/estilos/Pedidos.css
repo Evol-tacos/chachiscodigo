@@ -37,7 +37,7 @@
     margin-bottom: 0.5rem;
 }
 
-select, .input-pedido {
+select, .input-pedido, textarea {
     width: 100%;
     max-width: 350px;
     padding: 12px;

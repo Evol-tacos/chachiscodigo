@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 // Conexión a la base de datos
 const db = mysql.createPool({
     host: process.env.HOSTDB || 'localhost', // Cambia 'localhost' a 'chachis_mysql'
