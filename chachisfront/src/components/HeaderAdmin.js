@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './estilos/Header.css';
 import { Link } from 'react-router-dom';
 import otherlogo from './icons/logo-png.png';
 import tipografia from './icons/Chachis-tipografia.png';
+import { AuthContext } from './AuthContext.js';
 
 function Menu() {
+    const { handleLogout } = useContext(AuthContext);
 
     return (
         <header className="header">
@@ -17,9 +19,11 @@ function Menu() {
                 <Link to="/">
                     <img className="tipografia-menu" src={tipografia} alt="Chachis Pastelería" />
                 </Link>
-                
             </div>
-            <p className='login-text right-space'>Admin</p>
+            <div className="logo-container">
+                <p className='login-text'>Admin</p>
+                <span className="login-text" onClick={handleLogout}>Cerrar sesión</span>
+            </div>
         </header>
     );
 }

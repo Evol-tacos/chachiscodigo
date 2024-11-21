@@ -23,6 +23,7 @@
     font-weight: bold;
     font-style: italic;
     color: #1c1c1c; /* Mantiene el color del texto */
+    margin-right: 1rem; /* Añadir un margen para separar el texto del icono */
 }
 
 .tipografia {

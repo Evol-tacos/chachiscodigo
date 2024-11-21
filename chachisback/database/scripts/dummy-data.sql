@@ -18,7 +18,7 @@ INSERT INTO `producto` (`nombre_producto`, `descripcion`, `id_categoria`, `preci
   ('Pastel de Coco', 'Pastel con sabor tropical de coco y cubierta de merengue.', 1, 300.00, 6, 'activo');
 
 -- Datos para tabla sabores
-INSERT INTO `sabores` (`nombre_sabor`, `descripcion`) VALUES 
+INSERT INTO `sabor` (`nombre_sabor`, `descripcion`) VALUES 
 ('Vainilla', 'Sabor clásico de vainilla'),
 ('Red Velvet', 'Sabor especial Red Velvet'),
 ('Café', 'Sabor intenso de café'),
@@ -26,7 +26,7 @@ INSERT INTO `sabores` (`nombre_sabor`, `descripcion`) VALUES
 ('Fresas', 'Sabor dulce de fresas');
 
 -- Datos para tabla rellenos
-INSERT INTO `rellenos` (`nombre_relleno`, `descripcion`) VALUES 
+INSERT INTO `relleno` (`nombre_relleno`, `descripcion`) VALUES 
 ('Crema pastelera', 'Relleno cremoso tradicional'),
 ('Chocolate', 'Relleno de chocolate'),
 ('Frutas', 'Relleno de frutas mixtas'),
@@ -35,7 +35,7 @@ INSERT INTO `rellenos` (`nombre_relleno`, `descripcion`) VALUES
 ('Crema de mantequilla', 'Relleno suave de crema');
 
 -- Datos para tabla tamanos
-INSERT INTO `tamanos` (`nombre_tamano`, `descripcion`) VALUES 
+INSERT INTO `tamano` (`nombre_tamano`, `descripcion`) VALUES 
 ('Individual', 'Porción individual'),
 ('Mediano', 'Tamaño para 4-6 personas'),
 ('Grande', 'Tamaño para 8-10 personas'),
@@ -44,7 +44,7 @@ INSERT INTO `tamanos` (`nombre_tamano`, `descripcion`) VALUES
 ('Extra Grande', 'Tamaño para más de 15 personas');
 
 -- Insertar datos en la tabla clientes
-INSERT INTO `clientes` (`nombre_completo`, `email`, `telefono`, `direccion`, `contrasena`,`tipo`, `fecha_creacion`) VALUES
+INSERT INTO `cliente` (`nombre_completo`, `email`, `telefono`, `direccion`, `contrasena`,`tipo`, `fecha_creacion`) VALUES
 ('admin', 'admin@admin.com', '6623058940', 'admin', '$2a$10$j0QgK/l/9zy4sUflJBwz3OcxBaGF.dQU.1FtMWWyMYF3Lbb/PEQXi', 'admin', '2024-11-20 14:03:56'),
 ('bryant', 'prueba@prueba.com', '6622575633', 'tepic', 'prueba123', 'admin' , '2024-11-15 07:55:49'),
 ('sofia figueroa', 'sofi@prueba.com', '6623712484', 'unison', '$2a$10$vWPLwzJd0YWALUErtP7f0.wZtWNmlvgVBXLfQHGrSqo/9tlB9aeUm', 'cliente', '2024-11-15 09:58:36'),

@@ -27,6 +27,8 @@
 .modal-logo-reg {
     width: 100px;
     height: 100px;
+    display: center;
+    margin-top: -6rem;
 }
 
 .registrarse {
@@ -74,14 +76,15 @@ label {
 }
 .back-button {
     font-family: "Century Gothic", sans-serif;
-    background-color: #D9412C; 
+    background-color: #fffae8; 
     color: white;
     border: none;
-    padding: 5px; /* Reducir el padding */
-    width: 30%; /* Reducir el ancho */
+    padding: 3px; /* Reducir el padding */
+    width: 35%; /* Reducir el ancho */
     border-radius: 8px;
     font-size: 0.875rem; /* Reducir el tamaño de la fuente */
     cursor: pointer;
     margin-top: 0.5rem; /* Reducir el margen superior */
     font-weight: bold;
+    display: flex;
 }
