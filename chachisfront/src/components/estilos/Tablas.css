@@ -153,3 +153,32 @@ tr:last-child td {
     border-radius: 5px;
   }
   
+  .detalle-text {
+    font-family: "Century Gothic", sans-serif;
+    cursor: pointer;
+    color: inherit;
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-style: italic;
+    color: #1c1c1c; /* Mantiene el color del texto */
+}
+
+.detalles-pedido {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .detalles-pedido h3 {
+    margin-top: 0;
+  }
+  
+  .detalles-pedido ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .detalles-pedido li {
+    margin-bottom: 5px;
+  }

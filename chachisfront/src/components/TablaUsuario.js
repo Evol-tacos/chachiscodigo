@@ -6,6 +6,17 @@ import { onDelete } from "../utils/api";
 
 function TablaUsuario() {
     const [clientes, setClientes] = useState([]);
+    const [mostrarEditar, setMostrarEditar] = useState(false); // Control de visibilidad del formulario para editar
+    const [nuevoUsuario, setNuevoUsuario] = useState({ // Estado inicial del formulario
+        id_cliente: "",
+        nombre_completo: "",
+        email: "",
+        telefono: "",
+        direccion: "",
+        tipo: "",
+    });
+    const [ setError] = useState(null); // Para manejar errores
+
 
     useEffect(() => {
         const fetchClientes = async () => {
@@ -23,7 +34,7 @@ function TablaUsuario() {
     }, []);
 
     const handleDelete = async (id) => {
-        const result = await onDelete("clientes", id);
+        const result = await onDelete("cliente", id);
         if (result.success) {
             setClientes((prevClientes) =>
                 prevClientes.filter((cliente) => cliente.id_cliente !== id)
@@ -32,6 +43,70 @@ function TablaUsuario() {
             console.error("Error al borrar:", result.error);
         }
     };
+
+    const iniciarEdicion = (cliente) => {
+        setMostrarEditar(true);
+        setNuevoUsuario(cliente); // Llenar el formulario con los datos del usuario seleccionado
+    };
+
+    const handleEditClick = async () => {
+
+        const tabla = 'cliente';
+        const datos = nuevoUsuario;
+        const id = nuevoUsuario.id_cliente;
+
+        try {
+            const response = await fetch("http://localhost:4000/api/actualizar", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    tabla,
+                    datos,
+                    id
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al actualizar usuario');
+            }
+
+            const usuarioActualizado = await response.json();
+
+            // Asegúrate de que el id_cliente se mantenga
+            const clienteConId = { ...usuarioActualizado, id_cliente: id };
+
+            // Actualizar el estado con el cliente actualizado
+            const clientesActualizados = clientes.map(cliente =>
+                cliente.id_cliente === id ? { ...cliente, ...clienteConId } : cliente
+            );
+
+            setClientes(clientesActualizados);
+            setMostrarEditar(false);
+            setError(null); // Limpiar error si existía
+
+            await refreshTable();
+        } catch (error) {
+            console.error("Error al actualizar usuario", error);
+            setError("Hubo un problema al actualizar el usuario. Intenta de nuevo.");
+        }
+    };
+
+    const refreshTable = async () => {
+        try {
+            const response = await fetch('http://localhost:4000/api/usuarios');
+            const data = await response.json();
+            setClientes(data);
+        } catch (error) {
+            console.error("Error al refrescar la tabla", error);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNuevoUsuario({ ...nuevoUsuario, [name]: value });
+      };
 
     return (
         <div>
@@ -58,7 +133,7 @@ function TablaUsuario() {
                             <td>
                                 <div className="left-space">
                                     <button
-                                        className="button-TP"
+                                        className="button-TP" onClick={() => iniciarEdicion(cliente)}
                                     >
                                         <img src={Edit} alt="Editar" className="icon-s" />
                                     </button>
@@ -74,6 +149,62 @@ function TablaUsuario() {
                     ))}
                 </tbody>
             </table>
+            {mostrarEditar && (
+
+                <div className="formulario-linea">
+                    <input
+                        type="text"
+                        name="nombre_completo"
+                        placeholder="Nombre"
+                        value={nuevoUsuario.nombre_completo}
+                        onChange={handleInputChange}
+                        className="input-form-linea"
+                    />
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        value={nuevoUsuario.email}
+                        onChange={handleInputChange}
+                        className="input-form-linea"
+                    />
+                    <input
+                        name="telefono"
+                        placeholder="Telefono"
+                        value={nuevoUsuario.telefono}
+                        onChange={handleInputChange}
+                        className="input-form-linea"
+                    />
+                    <input
+                        type="text"
+                        name="direccion"
+                        placeholder="Dirección"
+                        value={nuevoUsuario.direccion}
+                        onChange={handleInputChange}
+                        className="input-form-linea"
+                    />
+                    <input
+                        type="enum"
+                        name="tipo"
+                        placeholder="Tipo"
+                        value={nuevoUsuario.tipo}
+                        onChange={handleInputChange}
+                        className="input-form-linea"
+                    />
+                    <button className="guardar-button-TP" onClick={() => handleEditClick()}>
+                        Guardar
+                    </button>
+                    <button
+                        className="cancelar-button-TP"
+                        onClick={() => {
+                            setMostrarEditar(false);
+                            setError(null);
+                        }}
+                    >
+                        Cancelar
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

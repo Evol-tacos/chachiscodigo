@@ -11,7 +11,7 @@ CREATE TABLE `categoria` (
   PRIMARY KEY (`id_categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `clientes` (
+CREATE TABLE `cliente` (
   `id_cliente` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_completo` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -48,24 +48,24 @@ CREATE TABLE `pedido` (
   `comprobante_pago_url` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id_pedido`),
   KEY `id_cliente` (`id_cliente`),
-  CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`)
+  CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `sabores` (
+CREATE TABLE `sabor` (
   `id_sabor` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_sabor` varchar(100) NOT NULL,
   `descripcion` text DEFAULT NULL,
   PRIMARY KEY (`id_sabor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `rellenos` (
+CREATE TABLE `relleno` (
   `id_relleno` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_relleno` varchar(100) NOT NULL,
   `descripcion` text DEFAULT NULL,
 PRIMARY KEY (`id_relleno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `tamanos` (
+CREATE TABLE `tamano` (
 `id_tamano` int(11) NOT NULL AUTO_INCREMENT,
 `nombre_tamano` varchar(100) NOT NULL,
 `descripcion` text DEFAULT NULL,
@@ -90,9 +90,9 @@ CREATE TABLE `detallepedido` (
   KEY `id_tamano` (`id_tamano`),
   CONSTRAINT `detallepedido_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`),
   CONSTRAINT `detallepedido_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`),
-  CONSTRAINT `detallepedido_ibfk_3` FOREIGN KEY (`id_sabor`) REFERENCES `sabores` (`id_sabor`),
-  CONSTRAINT `detallepedido_ibfk_4` FOREIGN KEY (`id_relleno`) REFERENCES `rellenos` (`id_relleno`),
-  CONSTRAINT `detallepedido_ibfk_5` FOREIGN KEY (`id_tamano`) REFERENCES `tamanos` (`id_tamano`)
+  CONSTRAINT `detallepedido_ibfk_3` FOREIGN KEY (`id_sabor`) REFERENCES `sabor` (`id_sabor`),
+  CONSTRAINT `detallepedido_ibfk_4` FOREIGN KEY (`id_relleno`) REFERENCES `relleno` (`id_relleno`),
+  CONSTRAINT `detallepedido_ibfk_5` FOREIGN KEY (`id_tamano`) REFERENCES `tamano` (`id_tamano`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 COMMIT;

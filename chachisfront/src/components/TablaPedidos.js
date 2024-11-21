@@ -5,6 +5,8 @@ function TablaPedidos() {
   // Estados para gestionar los valores de cada dropdown
 
   const [pedidos, setPedidos] = useState([]);
+  const [ detalles, setDetalles ] = useState([]);
+  const [pedidoSeleccionado, setPedidoSeleccionado] = useState(null);
 
   useEffect(() => {
     const fetchPedidos = async () => {
@@ -21,8 +23,25 @@ function TablaPedidos() {
     fetchPedidos();
   }, []);
 
+  const handleDetalles = async (id_pedido) => {
+    try {
+      const response = await fetch(`http://localhost:4000/api/detalles/${id_pedido}`);
+      const data = await response.json();
+      console.log(data);
+      console.log("Pedido seleccionado:", id_pedido);
+      console.log("Estado detalles:", detalles);
+      setDetalles(Array.isArray(data) ? data : []);
+      setPedidoSeleccionado(id_pedido);
+    } catch (error) {
+      console.error('Error al obtener los detalles', error);
+      setDetalles([]);
+      setPedidoSeleccionado(null);
+    }
+  };
+  
+
   // Manejar el cambio de valor en los dropdowns de pago
-  const handleCambio = (id_pedido, campo, valor) => {
+  const handleCambio = async (id_pedido, campo, valor) => {
     setPedidos((prevPedidos) =>
       prevPedidos.map((pedido) =>
         pedido.id_pedido === id_pedido
@@ -30,7 +49,40 @@ function TablaPedidos() {
           : pedido
       )
     );
-  };
+
+    // Actualizar el estado del pedido en la base de datos
+    const datosActualizados = { [campo]: valor };
+
+  try {
+    const response = await fetch("http://localhost:4000/api/actualizar", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tabla: 'pedido',
+        datos: datosActualizados,
+        id: id_pedido
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al actualizar pedido');
+    }
+    const pedidoActualizadoDesdeServidor = await response.json();
+    console.log("Pedido actualizado:", pedidoActualizadoDesdeServidor);
+
+    // Actualizar el estado con el pedido actualizado desde el servidor
+    setPedidos((prevPedidos) =>
+      prevPedidos.map((pedido) =>
+        pedido.id_pedido === id_pedido ? { ...pedido, ...pedidoActualizadoDesdeServidor } : pedido
+      )
+    );
+
+  } catch (error) {
+    console.error("Error al actualizar pedido", error);
+  }
+};
 
   return (
     <div>
@@ -72,11 +124,32 @@ function TablaPedidos() {
                   <option value="cancelado">Cancelado</option>
                 </select>
               </td>
-              <td>Ver detalles</td>
+              <td className="detalle-text" onClick={() => handleDetalles(pedido.id_pedido)}>
+                Ver detalles
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {pedidoSeleccionado && detalles.length > 0 && (
+        <DetallesPedido detalles={detalles} pedidoSeleccionado={pedidoSeleccionado} />
+      )}
+    </div>
+  );
+}
+
+function DetallesPedido({ detalles, pedidoSeleccionado }) {
+  return (
+    <div className="detalles-pedido">
+      <h3>Detalles del Pedido {pedidoSeleccionado}</h3>
+      <ul>
+        {detalles.map((detalle, index) => (
+          <li key={index}>
+            <strong>Instrucciones:    </strong>{detalle.instrucciones}< br />
+            <strong>Mensaje:   </strong>{detalle.mensaje}<br />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
